@@ -32,9 +32,14 @@ export default function DashboardPage() {
       }
     );
 
-    const topResponse = await axios.get(
-      "https://aminacontrol-api-729925860477.us-central1.run.app/top-productos"
-    );
+   const topResponse = await axios.get(
+  "https://aminacontrol-api-729925860477.us-central1.run.app/top-productos",
+  {
+    params: {
+      empresa_id: usuario.empresa_id
+    }
+  }
+);
 
     setData(response.data);
 
