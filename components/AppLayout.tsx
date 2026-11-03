@@ -59,6 +59,11 @@ export default function AppLayout({
             🚚 Proveedores
           </Link>
 
+          <Link href="/productos">
+  📦 Productos
+</Link>
+
+
           <Link href="/insumos" className="block hover:text-blue-400">
             📦 Insumos
           </Link>
