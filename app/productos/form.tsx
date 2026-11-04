@@ -25,7 +25,7 @@ export default function ProductosForm() {
         {
           empresa_id: usuario.empresa_id,
           nombre,
-          precio_venta: precioVenta,
+          precio_venta: Number(precioVenta),
           tipo_producto: tipoProducto
         }
       );
@@ -34,11 +34,22 @@ export default function ProductosForm() {
 
       location.reload();
 
-    } catch (error) {
+   } catch (error: any) {
 
-      console.error(error);
+  console.error(
+    "ERROR PRODUCTO:",
+    error?.response?.data
+  );
 
-    }
+  alert(
+    JSON.stringify(
+      error?.response?.data,
+      null,
+      2
+    )
+  );
+
+}
 
   };
 

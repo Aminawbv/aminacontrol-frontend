@@ -9,23 +9,34 @@ export default function ProductosListado() {
 
   useEffect(() => {
 
-    const cargarProductos = async () => {
+const cargarProductos = async () => {
 
-      try {
+  try {
 
-        const response = await axios.get(
-          "https://aminacontrol-api-729925860477.us-central1.run.app/productos"
-        );
+    const usuario = JSON.parse(
+      localStorage.getItem("usuario") || "{}"
+    );
 
-        setProductos(response.data);
-
-      } catch (error) {
-
-        console.error(error);
-
+    const response = await axios.get(
+      "https://aminacontrol-api-729925860477.us-central1.run.app/productos",
+      {
+        params: {
+          empresa_id: usuario.empresa_id
+        }
       }
+    );
 
-    };
+    console.log("PRODUCTOS", response.data);
+
+    setProductos(response.data);
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+};
 
     cargarProductos();
 
@@ -53,6 +64,10 @@ export default function ProductosListado() {
               Tipo
             </th>
 
+            <th className="border p-2">
+  Precio Venta
+</th>  
+
           </tr>
 
         </thead>
@@ -66,6 +81,13 @@ export default function ProductosListado() {
               <td className="border p-2">
                 {producto.nombre}
               </td>
+
+              <td className="border p-2">
+  $
+  {Number(
+    producto.precio_venta || 0
+  ).toLocaleString()}
+</td>
 
               <td className="border p-2">
 

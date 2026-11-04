@@ -59,7 +59,10 @@ export default function AppLayout({
             🚚 Proveedores
           </Link>
 
-          <Link href="/productos">
+<Link
+  href="/productos"
+  className="block hover:text-blue-400"
+>
   📦 Productos
 </Link>
 
@@ -88,9 +91,13 @@ export default function AppLayout({
             🏭 Producción
           </Link>
 
-          <Link href="/rentabilidad">
+<Link
+  href="/rentabilidad"
+  className="block hover:text-blue-400"
+>
   💰 Rentabilidad
 </Link>
+
 
         </nav>
 

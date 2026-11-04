@@ -1,20 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 
 export default function RecetasForm() {
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting }
-  } = useForm();
-
   const [productos, setProductos] = useState<any[]>([]);
   const [insumos, setInsumos] = useState<any[]>([]);
+
+  const [productoId, setProductoId] = useState("");
+  const [rendimiento, setRendimiento] = useState("");
+
+  const [detalles, setDetalles] = useState([
+    {
+      insumo_id: "",
+      cantidad: "",
+      unidad: "gr"
+    }
+  ]);
 
   useEffect(() => {
 
@@ -22,16 +25,32 @@ export default function RecetasForm() {
 
       try {
 
-        const productosResponse = await axios.get(
-          "https://aminacontrol-api-729925860477.us-central1.run.app/productos"
+        const usuario = JSON.parse(
+          localStorage.getItem("usuario") || "{}"
         );
 
-        const insumosResponse = await axios.get(
-          "https://aminacontrol-api-729925860477.us-central1.run.app/insumos-select"
+        const productosResponse =
+          await axios.get(
+            "https://aminacontrol-api-729925860477.us-central1.run.app/productos-elaborados",
+            {
+              params: {
+                empresa_id: usuario.empresa_id
+              }
+            }
+          );
+
+        const insumosResponse =
+          await axios.get(
+            "https://aminacontrol-api-729925860477.us-central1.run.app/insumos-select"
+          );
+
+        setProductos(
+          productosResponse.data
         );
 
-        setProductos(productosResponse.data);
-        setInsumos(insumosResponse.data);
+        setInsumos(
+          insumosResponse.data
+        );
 
       } catch (error) {
 
@@ -45,40 +64,108 @@ export default function RecetasForm() {
 
   }, []);
 
-  const onSubmit = async (data: any) => {
+  const agregarInsumo = () => {
+
+    setDetalles([
+      ...detalles,
+      {
+        insumo_id: "",
+        cantidad: "",
+        unidad: "gr"
+      }
+    ]);
+
+  };
+
+  const eliminarInsumo = (index: number) => {
+
+    const nuevosDetalles =
+      [...detalles];
+
+    nuevosDetalles.splice(
+      index,
+      1
+    );
+
+    setDetalles(
+      nuevosDetalles
+    );
+
+  };
+
+  const actualizarDetalle = (
+    index: number,
+    campo: string,
+    valor: string
+  ) => {
+
+    const nuevosDetalles =
+      [...detalles];
+
+    nuevosDetalles[index] = {
+      ...nuevosDetalles[index],
+      [campo]: valor
+    };
+
+    setDetalles(
+      nuevosDetalles
+    );
+
+  };
+
+  const guardar = async () => {
 
     try {
 
-     const usuario = JSON.parse(
-  localStorage.getItem("usuario") || "{}"
-);
+      const usuario = JSON.parse(
+        localStorage.getItem("usuario") || "{}"
+      );
 
-await axios.post(
-  "https://aminacontrol-api-729925860477.us-central1.run.app/recetas",
-  {
-    empresa_id: usuario.empresa_id,
+      await axios.post(
+        "https://aminacontrol-api-729925860477.us-central1.run.app/recetas",
+        {
+          empresa_id:
+            usuario.empresa_id,
 
-    producto_id: data.producto_id,
+          producto_id:
+            productoId,
 
-    rendimiento: Number(data.rendimiento),
+          rendimiento:
+            Number(
+              rendimiento
+            ),
 
-    insumo_id: data.insumo_id,
+          detalles:
+            detalles.map(
+              (detalle) => ({
+                insumo_id:
+                  detalle.insumo_id,
 
-    cantidad: Number(data.cantidad),
+                cantidad:
+                  Number(
+                    detalle.cantidad
+                  ),
 
-    unidad: data.unidad
-  }
-);
+                unidad:
+                  detalle.unidad
+              })
+            )
+        }
+      );
 
-      alert("Receta creada correctamente");
+      alert(
+        "Receta creada correctamente"
+      );
 
-      reset();
+      location.reload();
 
     } catch (error) {
 
       console.error(error);
 
-      alert("Error al crear receta");
+      alert(
+        "Error al guardar receta"
+      );
 
     }
 
@@ -86,34 +173,46 @@ await axios.post(
 
   return (
 
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4"
-    >
+    <div className="space-y-6">
 
       <div>
 
-        <label>Producto</label>
+        <label className="block mb-2">
+
+          Producto
+
+        </label>
 
         <select
-          {...register("producto_id")}
-          className="input"
+          value={productoId}
+          onChange={(e) =>
+            setProductoId(
+              e.target.value
+            )
+          }
+          className="border p-2 w-full"
         >
 
           <option value="">
             Seleccione
           </option>
 
-          {productos.map((producto) => (
+          {productos.map(
+            (producto) => (
 
-            <option
-              key={producto.id_producto}
-              value={producto.id_producto}
-            >
-              {producto.nombre}
-            </option>
+              <option
+                key={
+                  producto.id_producto
+                }
+                value={
+                  producto.id_producto
+                }
+              >
+                {producto.nombre}
+              </option>
 
-          ))}
+            )
+          )}
 
         </select>
 
@@ -121,85 +220,168 @@ await axios.post(
 
       <div>
 
-        <label>Rendimiento</label>
+        <label className="block mb-2">
+
+          Rendimiento
+
+        </label>
 
         <input
           type="number"
-          {...register("rendimiento")}
-          className="input"
+          value={rendimiento}
+          onChange={(e) =>
+            setRendimiento(
+              e.target.value
+            )
+          }
+          className="border p-2 w-full"
         />
 
       </div>
 
       <div>
 
-        <label>Insumo</label>
+        <h3 className="font-bold text-lg mb-4">
 
-        <select
-          {...register("insumo_id")}
-          className="input"
-        >
+          Insumos
 
-          <option value="">
-            Seleccione
-          </option>
+        </h3>
 
-          {insumos.map((insumo) => (
+        {detalles.map(
+          (detalle, index) => (
 
-            <option
-              key={insumo.insumo_id}
-              value={insumo.insumo_id}
+            <div
+              key={index}
+              className="grid grid-cols-4 gap-2 mb-2"
             >
-              {insumo.nombre}
-            </option>
 
-          ))}
+              <select
+                value={
+                  detalle.insumo_id
+                }
+                onChange={(e) =>
+                  actualizarDetalle(
+                    index,
+                    "insumo_id",
+                    e.target.value
+                  )
+                }
+                className="border p-2"
+              >
 
-        </select>
+                <option value="">
+                  Insumo
+                </option>
 
-      </div>
+                {insumos.map(
+                  (insumo) => (
 
-      <div>
+                    <option
+                      key={
+                        insumo.insumo_id
+                      }
+                      value={
+                        insumo.insumo_id
+                      }
+                    >
+                      {insumo.nombre}
+                    </option>
 
-        <label>Cantidad</label>
+                  )
+                )}
 
-        <input
-          type="number"
-          {...register("cantidad")}
-          className="input"
-        />
+              </select>
 
-      </div>
+              <input
+                type="number"
+                placeholder="Cantidad"
+                value={
+                  detalle.cantidad
+                }
+                onChange={(e) =>
+                  actualizarDetalle(
+                    index,
+                    "cantidad",
+                    e.target.value
+                  )
+                }
+                className="border p-2"
+              />
 
-      <div>
+              <select
+                value={
+                  detalle.unidad
+                }
+                onChange={(e) =>
+                  actualizarDetalle(
+                    index,
+                    "unidad",
+                    e.target.value
+                  )
+                }
+                className="border p-2"
+              >
 
-        <label>Unidad</label>
+                <option value="kg">
+                  kg
+                </option>
 
-        <select
-          {...register("unidad")}
-          className="input"
+                <option value="gr">
+                  gr
+                </option>
+
+                <option value="lt">
+                  lt
+                </option>
+
+                <option value="ml">
+                  ml
+                </option>
+
+                <option value="unidad">
+                  unidad
+                </option>
+
+              </select>
+
+              <button
+                type="button"
+                onClick={() =>
+                  eliminarInsumo(
+                    index
+                  )
+                }
+                className="bg-red-600 text-white rounded px-2"
+              >
+                X
+              </button>
+
+            </div>
+
+          )
+        )}
+
+        <button
+          type="button"
+          onClick={
+            agregarInsumo
+          }
+          className="bg-green-600 text-white px-4 py-2 rounded mt-2"
         >
-          <option value="">Seleccione</option>
-          <option value="kg">kg</option>
-          <option value="gr">gr</option>
-          <option value="lt">lt</option>
-          <option value="ml">ml</option>
-          <option value="unidad">unidad</option>
-        </select>
+          + Agregar Insumo
+        </button>
 
       </div>
 
       <button
-        type="submit"
-        disabled={isSubmitting}
+        type="button"
+        onClick={guardar}
         className="bg-blue-600 text-white px-4 py-2 rounded"
       >
-        {isSubmitting
-          ? "Guardando..."
-          : "Registrar Receta"}
+        Guardar Receta
       </button>
 
-    </form>
+    </div>
 
   );
 

@@ -40,12 +40,86 @@ export default function RecetasListado() {
 
   }, []);
 
+  const verDetalle = async (
+    recetaId: string
+  ) => {
+
+    try {
+
+      const response = await axios.get(
+        `https://aminacontrol-api-729925860477.us-central1.run.app/recetas/${recetaId}`
+      );
+
+      const detalle = response.data
+        .map(
+          (item: any) =>
+            `${item.insumo} - ${item.cantidad} ${item.unidad}`
+        )
+        .join("\n");
+
+      alert(
+        `Ingredientes:\n\n${detalle}`
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Error al cargar detalle"
+      );
+
+    }
+
+  };
+
+  const eliminarReceta = async (
+    recetaId: string
+  ) => {
+
+    const confirmar = confirm(
+      "¿Desea eliminar esta receta?"
+    );
+
+    if (!confirmar) return;
+
+    try {
+
+      await axios.delete(
+        `https://aminacontrol-api-729925860477.us-central1.run.app/recetas/${recetaId}`
+      );
+
+      alert(
+        "Receta eliminada"
+      );
+
+      setRecetas(
+        recetas.filter(
+          (r) =>
+            r.receta_id !== recetaId
+        )
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Error al eliminar receta"
+      );
+
+    }
+
+  };
+
   return (
 
     <div className="mt-8">
 
       <h2 className="text-xl font-bold mb-4">
+
         Recetas Registradas
+
       </h2>
 
       <table className="w-full border">
@@ -74,6 +148,10 @@ export default function RecetasListado() {
               Rendimiento
             </th>
 
+            <th className="border p-2">
+              Acciones
+            </th>
+
           </tr>
 
         </thead>
@@ -82,9 +160,7 @@ export default function RecetasListado() {
 
           {recetas.map((receta) => (
 
-            <tr
-              key={`${receta.receta_id}-${receta.insumo}`}
-            >
+            <tr key={`${receta.receta_id}-${receta.insumo}`}>
 
               <td className="border p-2">
                 {receta.producto}
@@ -104,6 +180,32 @@ export default function RecetasListado() {
 
               <td className="border p-2">
                 {receta.rendimiento}
+              </td>
+
+              <td className="border p-2">
+
+                <button
+                  onClick={() =>
+                    verDetalle(
+                      receta.receta_id
+                    )
+                  }
+                  className="bg-blue-600 text-white px-2 py-1 rounded mr-2"
+                >
+                  Ver
+                </button>
+
+                <button
+                  onClick={() =>
+                    eliminarReceta(
+                      receta.receta_id
+                    )
+                  }
+                  className="bg-red-600 text-white px-2 py-1 rounded"
+                >
+                  Eliminar
+                </button>
+
               </td>
 
             </tr>
