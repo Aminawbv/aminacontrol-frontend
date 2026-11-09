@@ -10,6 +10,9 @@ export default function RecetasForm() {
 
   const [productoId, setProductoId] = useState("");
   const [rendimiento, setRendimiento] = useState("");
+  const [unidadRendimiento,
+  setUnidadRendimiento] =
+  useState("porciones");
 
   const [detalles, setDetalles] = useState([
     {
@@ -135,6 +138,9 @@ export default function RecetasForm() {
               rendimiento
             ),
 
+            unidad_rendimiento:
+            unidadRendimiento,
+
           detalles:
             detalles.map(
               (detalle) => ({
@@ -238,6 +244,44 @@ export default function RecetasForm() {
         />
 
       </div>
+
+          <div>
+
+  <label className="block mb-2">
+
+    Unidad de Rendimiento
+
+  </label>
+
+  <select
+    value={unidadRendimiento}
+    onChange={(e) =>
+      setUnidadRendimiento(
+        e.target.value
+      )
+    }
+    className="border p-2 w-full"
+  >
+
+    <option value="porciones">
+      Porciones
+    </option>
+
+    <option value="unidades">
+      Unidades
+    </option>
+
+    <option value="kg">
+      Kg
+    </option>
+
+    <option value="lt">
+      Litros
+    </option>
+
+  </select>
+
+</div>
 
       <div>
 
