@@ -6,6 +6,8 @@ import axios from "axios";
 export default function ProductosListado() {
 
   const [productos, setProductos] = useState<any[]>([]);
+  const [editando, setEditando] =
+  useState<any>(null);
 
   useEffect(() => {
 
@@ -42,6 +44,69 @@ const cargarProductos = async () => {
 
   }, []);
 
+const eliminarProducto = async (
+  idProducto: string
+) => {
+
+  const confirmar = confirm(
+    "¿Desea eliminar este producto?"
+  );
+
+  if (!confirmar) return;
+
+  try {
+
+    await axios.delete(
+      `https://aminacontrol-api-729925860477.us-central1.run.app/productos/${idProducto}`
+    );
+
+    setProductos(
+      productos.filter(
+        (p) =>
+          p.id_producto !== idProducto
+      )
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+};
+
+const editarProducto = async (
+  producto: any
+) => {
+
+  const nombre = prompt(
+    "Nombre producto",
+    producto.nombre
+  );
+
+  if (!nombre) return;
+
+  const precio = prompt(
+    "Precio venta",
+    producto.precio_venta
+  );
+
+  if (!precio) return;
+
+  await axios.put(
+    `https://aminacontrol-api-729925860477.us-central1.run.app/productos/${producto.id_producto}`,
+    {
+      nombre,
+      precio_venta: Number(precio),
+      tipo_producto:
+        producto.tipo_producto
+    }
+  );
+
+  location.reload();
+
+};
+
   return (
 
     <div className="mt-8">
@@ -67,6 +132,9 @@ const cargarProductos = async () => {
             <th className="border p-2">
   Precio Venta
 </th>  
+<th className="border p-2">
+  Acciones
+</th>
 
           </tr>
 
@@ -106,6 +174,32 @@ const cargarProductos = async () => {
                 )}
 
               </td>
+
+<td className="border p-2">
+
+  <button
+    onClick={() =>
+      editarProducto(
+        producto
+      )
+    }
+    className="bg-yellow-600 text-white px-2 py-1 rounded mr-2"
+  >
+    Editar
+  </button>
+
+  <button
+    onClick={() =>
+      eliminarProducto(
+        producto.id_producto
+      )
+    }
+    className="bg-red-600 text-white px-2 py-1 rounded"
+  >
+    Eliminar
+  </button>
+
+</td>
 
             </tr>
 
