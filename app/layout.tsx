@@ -1,5 +1,7 @@
+
 import AuthGuard from "@/components/AuthGuard";
 import AppLayout from "@/components/AppLayout";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -31,12 +33,18 @@ export default function RootLayout({
     >
       <body className="min-h-screen">
 
- <AuthGuard>
+    <Suspense fallback={<div>Cargando...</div>}>
 
-        <AppLayout>
-          {children}
-        </AppLayout>
- </AuthGuard>
+  <AuthGuard>
+
+    <AppLayout>
+      {children}
+    </AppLayout>
+
+  </AuthGuard>
+
+</Suspense>
+
         </body>
     </html>
   );
