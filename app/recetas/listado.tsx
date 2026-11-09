@@ -73,6 +73,15 @@ export default function RecetasListado() {
 
   };
 
+const editarReceta = (
+  recetaId: string
+) => {
+
+  window.location.href =
+    `/recetas/editar/${recetaId}`;
+
+};
+
   const eliminarReceta = async (
     recetaId: string
   ) => {
@@ -176,12 +185,15 @@ export default function RecetasListado() {
           >
             Ver
           </button>
-
-          <button
-            className="bg-yellow-600 text-white px-2 py-1 rounded mr-2"
-          >
-            Editar
-          </button>
+<button
+  onClick={() =>
+    window.location.href =
+      `/recetas/editar/${receta.receta_id}`
+  }
+  className="bg-yellow-600 text-white px-2 py-1 rounded mr-2"
+>
+  Editar
+</button>
 
           <button
             onClick={() =>
