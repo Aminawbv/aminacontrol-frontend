@@ -124,97 +124,85 @@ export default function RecetasListado() {
 
       <table className="w-full border">
 
-        <thead>
+  <thead>
 
-          <tr className="bg-slate-100 text-black">
+    <tr className="bg-slate-100 text-black">
 
-            <th className="border p-2">
-              Producto
-            </th>
+      <th className="border p-2">
+        Producto
+      </th>
 
-            <th className="border p-2">
-              Insumo
-            </th>
+      <th className="border p-2">
+        Rendimiento
+      </th>
 
-            <th className="border p-2">
-              Cantidad
-            </th>
+      <th className="border p-2">
+        Acciones
+      </th>
 
-            <th className="border p-2">
-              Unidad
-            </th>
+    </tr>
 
-            <th className="border p-2">
-              Rendimiento
-            </th>
+  </thead>
 
-            <th className="border p-2">
-              Acciones
-            </th>
+  <tbody>
 
-          </tr>
+    {recetas.map((receta) => (
 
-        </thead>
+      <tr key={receta.receta_id}>
 
-        <tbody>
+        <td className="border p-2">
+          {receta.producto}
+        </td>
 
-          {recetas.map((receta) => (
+        <td className="border p-2">
 
-            <tr key={`${receta.receta_id}-${receta.insumo}`}>
+          {receta.rendimiento}
 
-              <td className="border p-2">
-                {receta.producto}
-              </td>
+          {" "}
 
-              <td className="border p-2">
-                {receta.insumo}
-              </td>
+          {receta.unidad_rendimiento || ""}
 
-              <td className="border p-2">
-                {receta.cantidad}
-              </td>
+        </td>
 
-              <td className="border p-2">
-                {receta.unidad}
-              </td>
+        <td className="border p-2">
 
-              <td className="border p-2">
-                {receta.rendimiento}
-              </td>
+          <button
+            onClick={() =>
+              verDetalle(
+                receta.receta_id
+              )
+            }
+            className="bg-blue-600 text-white px-2 py-1 rounded mr-2"
+          >
+            Ver
+          </button>
 
-              <td className="border p-2">
+          <button
+            className="bg-yellow-600 text-white px-2 py-1 rounded mr-2"
+          >
+            Editar
+          </button>
 
-                <button
-                  onClick={() =>
-                    verDetalle(
-                      receta.receta_id
-                    )
-                  }
-                  className="bg-blue-600 text-white px-2 py-1 rounded mr-2"
-                >
-                  Ver
-                </button>
+          <button
+            onClick={() =>
+              eliminarReceta(
+                receta.receta_id
+              )
+            }
+            className="bg-red-600 text-white px-2 py-1 rounded"
+          >
+            Eliminar
+          </button>
 
-                <button
-                  onClick={() =>
-                    eliminarReceta(
-                      receta.receta_id
-                    )
-                  }
-                  className="bg-red-600 text-white px-2 py-1 rounded"
-                >
-                  Eliminar
-                </button>
+        </td>
 
-              </td>
+      </tr>
 
-            </tr>
+    ))}
 
-          ))}
+  </tbody>
 
-        </tbody>
-
-      </table>
+</table>
 
     </div>
 
