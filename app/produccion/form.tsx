@@ -22,11 +22,22 @@ export default function ProduccionForm() {
 
     try {
 
-      const response = await axios.get(
-        "https://aminacontrol-api-729925860477.us-central1.run.app/productos"
+      const usuario = JSON.parse(
+        localStorage.getItem("usuario") || "{}"
       );
 
-      setProductos(response.data);
+      const response = await axios.get(
+        "https://aminacontrol-api-729925860477.us-central1.run.app/productos-elaborados",
+        {
+          params: {
+            empresa_id: usuario.empresa_id
+          }
+        }
+      );
+
+      setProductos(
+        response.data
+      );
 
     } catch (error) {
 
@@ -39,6 +50,7 @@ export default function ProduccionForm() {
   cargarProductos();
 
 }, []);
+
   const onSubmit = async (data: any) => {
 
     try {
