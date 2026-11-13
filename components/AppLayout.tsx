@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 
 export default function AppLayout({
   children,
@@ -40,8 +39,8 @@ export default function AppLayout({
   href="/empresas"
   className={
     pathname === "/empresas"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }
 >
   🏢 Empresas
@@ -50,32 +49,32 @@ export default function AppLayout({
   href="/usuarios"
   className={
     pathname === "/usuarios"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }
 >
   👤 Usuarios
 </Link>
           <Link href="/dashboard" className={
     pathname === "/dashboard"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }>
             🏠 Dashboard
           </Link>
 
           <Link href="/clientes" className={
     pathname === "/clientes"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }>
             👥 Clientes
           </Link>
 
           <Link href="/proveedores" className={
     pathname === "/proveedores"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }>
             🚚 Proveedores
           </Link>
@@ -84,8 +83,8 @@ export default function AppLayout({
   href="/productos"
   className={
     pathname === "/productos"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }
 >
   📦 Productos
@@ -96,8 +95,8 @@ export default function AppLayout({
   href="/insumos"
   className={
     pathname === "/insumos"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }
 >
   📦 Insumos
@@ -108,8 +107,8 @@ export default function AppLayout({
   href="/compras"
   className={
     pathname === "/compras"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }
 >
   🛒 Compras
@@ -117,32 +116,32 @@ export default function AppLayout({
 
           <Link href="/ventas" className={
     pathname === "/ventas"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }>
             💰 Ventas
           </Link>
 
           <Link href="/inventario" className={
     pathname === "/inventario"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }>
             📋 Inventario
           </Link>
 
           <Link href="/recetas" className={
     pathname === "/recetas"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }>
             📖 Recetas
           </Link>
 
           <Link href="/produccion" className={
     pathname === "/produccion"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }>
             🏭 Producción
           </Link>
@@ -151,8 +150,8 @@ export default function AppLayout({
   href="/rentabilidad"
   className={
     pathname === "/rentabilidad"
-      ? "bg-blue-600 text-white px-3 py-2 rounded"
-      : "px-3 py-2"
+  ? "block bg-blue-600 text-white px-3 py-2 rounded"
+  : "block px-3 py-2 hover:bg-slate-800 rounded"
   }
 >
   💰 Rentabilidad

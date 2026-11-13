@@ -50,47 +50,45 @@ console.log("COMPRAS", response.data);
 
       <table className="w-full border">
 
-        <thead>
+<thead>
 
-          <tr className="bg-slate-100 text-black">
+  <tr className="bg-slate-100 text-black">
 
-            <th className="border p-2">
-              Fecha
-            </th>
+    <th className="border p-2">
+      Fecha
+    </th>
 
-            <th className="border p-2">
-              Proveedor
-            </th>
+    <th className="border p-2">
+      Proveedor
+    </th>
 
-            <th className="border p-2">
-              Insumo
-            </th>
+    <th className="border p-2">
+      Insumo
+    </th>
 
-            <th className="border p-2">Unidad</th>
+    <th className="border p-2">
+      Cantidad
+    </th>
 
-            <td className="border p-2">
-                {compra.unidad_compra}
-            </td>
+    <th className="border p-2">
+      Unidad
+    </th>
 
-            <th className="border p-2">
-              Cantidad
-            </th>
+    <th className="border p-2">
+      Total
+    </th>
 
-            <th className="border p-2">
-              Total
-            </th>
+    <th className="border p-2">
+      Método Pago
+    </th>
 
-            <th className="border p-2">
-              Método Pago
-            </th>
+    <th className="border p-2">
+      Estado
+    </th>
 
-            <th className="border p-2">
-              Estado
-            </th>
+  </tr>
 
-          </tr>
-
-        </thead>
+</thead>
 
         <tbody>
 
@@ -112,12 +110,16 @@ console.log("COMPRAS", response.data);
                 {compra.insumo || "-"}
               </td>
 
-              <td className="border p-2">
-                {compra.cantidad?.value ||
-                  compra.cantidad ||
-                  "-"}
-              </td>
+<td className="border p-2">
+  {compra.cantidad?.value ||
+    compra.cantidad ||
+    "-"}
+</td>
 
+<td className="border p-2">
+  {compra.unidad_compra || "-"}
+</td>
+             
               <td className="border p-2">
                 $
                 {Number(
