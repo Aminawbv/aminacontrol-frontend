@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function AppLayout({
   children,
@@ -37,63 +38,122 @@ export default function AppLayout({
         <nav className="space-y-4">
 <Link
   href="/empresas"
-  className="block hover:text-blue-400"
+  className={
+    pathname === "/empresas"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }
 >
   🏢 Empresas
 </Link>
 <Link
   href="/usuarios"
-  className="block hover:text-blue-400"
+  className={
+    pathname === "/usuarios"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }
 >
   👤 Usuarios
 </Link>
-          <Link href="/dashboard" className="block hover:text-blue-400">
+          <Link href="/dashboard" className={
+    pathname === "/dashboard"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }>
             🏠 Dashboard
           </Link>
 
-          <Link href="/clientes" className="block hover:text-blue-400">
+          <Link href="/clientes" className={
+    pathname === "/clientes"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }>
             👥 Clientes
           </Link>
 
-          <Link href="/proveedores" className="block hover:text-blue-400">
+          <Link href="/proveedores" className={
+    pathname === "/proveedores"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }>
             🚚 Proveedores
           </Link>
 
 <Link
   href="/productos"
-  className="block hover:text-blue-400"
+  className={
+    pathname === "/productos"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }
 >
   📦 Productos
 </Link>
 
 
-          <Link href="/insumos" className="block hover:text-blue-400">
-            📦 Insumos
-          </Link>
+                    <Link
+  href="/insumos"
+  className={
+    pathname === "/insumos"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }
+>
+  📦 Insumos
+</Link>
 
-          <Link href="/compras" className="block hover:text-blue-400">
-            🛒 Compras
-          </Link>
+          
+          <Link
+  href="/compras"
+  className={
+    pathname === "/compras"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }
+>
+  🛒 Compras
+</Link>
 
-          <Link href="/ventas" className="block hover:text-blue-400">
+          <Link href="/ventas" className={
+    pathname === "/ventas"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }>
             💰 Ventas
           </Link>
 
-          <Link href="/inventario" className="block hover:text-blue-400">
+          <Link href="/inventario" className={
+    pathname === "/inventario"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }>
             📋 Inventario
           </Link>
 
-          <Link href="/recetas" className="block hover:text-blue-400">
+          <Link href="/recetas" className={
+    pathname === "/recetas"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }>
             📖 Recetas
           </Link>
 
-          <Link href="/produccion" className="block hover:text-blue-400">
+          <Link href="/produccion" className={
+    pathname === "/produccion"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }>
             🏭 Producción
           </Link>
 
 <Link
   href="/rentabilidad"
-  className="block hover:text-blue-400"
+  className={
+    pathname === "/rentabilidad"
+      ? "bg-blue-600 text-white px-3 py-2 rounded"
+      : "px-3 py-2"
+  }
 >
   💰 Rentabilidad
 </Link>

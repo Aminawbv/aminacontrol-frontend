@@ -87,6 +87,11 @@ await axios.post(
 
   };
 
+const hoy =
+  new Date()
+    .toISOString()
+    .split("T")[0];
+
   return (
 
     <form
@@ -127,10 +132,11 @@ await axios.post(
         <label>Fecha Compra</label>
 
         <input
-          type="date"
-          {...register("fecha_compra")}
-          className="input"
-        />
+  type="date"
+  defaultValue={hoy}
+  {...register("fecha_compra")}
+  className="input"
+/>
 
       </div>
 

@@ -73,24 +73,7 @@ await axios.post(
         </select>
       </div>
 
-      <div>
-        <label>Costo Unitario</label>
-        <input
-          type="number"
-          {...register("costo_unitario")}
-          className="input"
-        />
-      </div>
-
-      <div>
-        <label>Stock Actual</label>
-        <input
-          type="number"
-          {...register("stock_actual")}
-          className="input"
-        />
-      </div>
-
+     
       <div>
         <label>Stock Mínimo</label>
         <input

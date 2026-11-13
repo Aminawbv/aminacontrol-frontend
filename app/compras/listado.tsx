@@ -66,6 +66,12 @@ console.log("COMPRAS", response.data);
               Insumo
             </th>
 
+            <th className="border p-2">Unidad</th>
+
+            <td className="border p-2">
+                {compra.unidad_compra}
+            </td>
+
             <th className="border p-2">
               Cantidad
             </th>
