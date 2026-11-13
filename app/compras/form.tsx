@@ -67,6 +67,8 @@ await axios.post(
 
     cantidad: Number(data.cantidad),
 
+    unidad_compra: data.unidad_compra,
+
     costo_unitario: Number(data.costo_unitario)
   }
 );
@@ -197,6 +199,43 @@ await axios.post(
           {...register("cantidad")}
           className="input"
         />
+
+          <div>
+
+  <label>Unidad Compra</label>
+
+  <select
+    {...register("unidad_compra")}
+    className="input"
+  >
+
+    <option value="">
+      Seleccione
+    </option>
+
+    <option value="kg">
+      Kg
+    </option>
+
+    <option value="gr">
+      Gramos
+    </option>
+
+    <option value="lt">
+      Litros
+    </option>
+
+    <option value="ml">
+      Mililitros
+    </option>
+
+    <option value="unidad">
+      Unidad
+    </option>
+
+  </select>
+
+</div>
 
       </div>
 
