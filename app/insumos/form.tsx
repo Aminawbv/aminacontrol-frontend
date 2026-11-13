@@ -17,7 +17,7 @@ export default function InsumosForm() {
   localStorage.getItem("usuario") || "{}"
 );
 
-await axios.post(
+  await axios.post(
   "https://aminacontrol-api-729925860477.us-central1.run.app/insumos",
   {
     empresa_id: usuario.empresa_id,
@@ -26,13 +26,7 @@ await axios.post(
 
     unidad: data.unidad,
 
-    costo_unitario: Number(data.costo_unitario),
-
-    stock_actual: Number(data.stock_actual),
-
-    stock_minimo: Number(data.stock_minimo),
-
-    proveedor_id: "",
+    stock_minimo: Number(data.stock_minimo)
   }
 );
 
