@@ -27,7 +27,7 @@ export default function LoginPage() {
       >
 
         <img
-          src="/logo1.png"
+          src="/Logo1.png"
           alt="Amina"
           className="w-16 h-16"
         />
