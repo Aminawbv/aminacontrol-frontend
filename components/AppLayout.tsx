@@ -81,11 +81,11 @@ const textClass = (path: string) =>
   "
 >
 
-  <img
-    src="/logo1.png"
-    alt="Amina"
-    className="w-14 h-14"
-  />
+<img
+  src="/favicon.ico"
+  alt="Amina"
+  className="w-14 h-14"
+/>
 
   <span
     className="
