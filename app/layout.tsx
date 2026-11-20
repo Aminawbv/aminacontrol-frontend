@@ -19,10 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Amina",
   description: "Sistema de gestión para pymes",
-  icons: {
-    icon: "/Logo1.png",
-  },
 };
+
+
 
 
 
