@@ -7,13 +7,18 @@ export default function VentasListado() {
 
   const [ventas, setVentas] = useState<any[]>([]);
 
-  const [ventaSeleccionada, setVentaSeleccionada] = useState<any>(null);
+  const [ventaSeleccionada, setVentaSeleccionada] =
+    useState<any>(null);
 
-  const [detalleVenta, setDetalleVenta] = useState<any[]>([]);
+  const [detalleVenta, setDetalleVenta] =
+    useState<any[]>([]);
 
-  const [mostrarModal, setMostrarModal] = useState(false);
+  const [mostrarModal, setMostrarModal] =
+    useState(false);
 
-  const verDetalle = async (idVenta: string) => {
+  const verDetalle = async (
+    idVenta: string
+  ) => {
 
     try {
 
@@ -38,7 +43,9 @@ export default function VentasListado() {
         error
       );
 
-      alert("Error al obtener detalle");
+      alert(
+        "Error al obtener detalle"
+      );
 
     }
 
@@ -79,35 +86,35 @@ export default function VentasListado() {
 
   return (
 
-    <div className="mt-8">
+    <div className="list-card mt-8">
 
-      <h2 className="text-xl font-bold mb-4">
+      <h2 className="text-xl font-bold mb-6">
         Ventas Registradas
       </h2>
 
-      <table className="w-full border">
+      <table className="w-full">
 
         <thead>
 
-          <tr className="bg-slate-100 text-black">
+          <tr>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Fecha
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Productos
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Medio Pago
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Total
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Detalle
             </th>
 
@@ -119,31 +126,63 @@ export default function VentasListado() {
 
           {ventas.map((venta) => (
 
-            <tr key={venta.id_venta}>
+            <tr
+              key={venta.id_venta}
+              className="hover:bg-slate-50"
+            >
 
-              <td className="border p-2">
+              <td className="p-3 whitespace-nowrap">
+
                 {venta.fecha?.value ||
                   venta.fecha}
+
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
+
                 {venta.productos}
+
               </td>
 
-              <td className="border p-2">
-                {venta.medio_pago}
+              <td className="p-3">
+
+                <span
+                  className="
+                  px-3
+                  py-1
+                  rounded-full
+                  bg-[#EEF5FF]
+                  text-[#4F83CC]
+                  text-sm
+                  font-medium
+                  "
+                >
+
+                  {venta.medio_pago === "transferencia"
+                    ? "Transferencia"
+                    : venta.medio_pago === "efectivo"
+                    ? "Efectivo"
+                    : venta.medio_pago === "tarjeta"
+                    ? "Tarjeta"
+                    : venta.medio_pago}
+
+                </span>
+
               </td>
 
-              <td className="border p-2">
+              <td className="p-3 font-semibold">
+
                 $
+
                 {Number(
                   venta.total?.value ||
                   venta.total ||
                   0
                 ).toLocaleString()}
+
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
 
                 <button
                   type="button"
@@ -152,7 +191,7 @@ export default function VentasListado() {
                       venta.id_venta
                     )
                   }
-                  className="bg-blue-600 text-white px-3 py-1 rounded"
+                  className="btn-view"
                 >
                   Ver
                 </button>
@@ -171,13 +210,23 @@ export default function VentasListado() {
 
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
 
-          <div className="bg-white p-6 rounded w-[700px] max-h-[80vh] overflow-auto">
+          <div
+            className="
+            bg-white
+            p-6
+            rounded-2xl
+            shadow-lg
+            w-[700px]
+            max-h-[80vh]
+            overflow-auto
+            "
+          >
 
-            <h2 className="text-2xl font-bold mb-4 text-black">
+            <h2 className="text-2xl font-bold mb-6">
               Detalle Venta
             </h2>
 
-            <div className="mb-4 text-black">
+            <div className="mb-6 space-y-2">
 
               <p>
                 <strong>ID:</strong>{" "}
@@ -207,21 +256,21 @@ export default function VentasListado() {
 
             </div>
 
-            <table className="w-full border text-black">
+            <table className="w-full">
 
               <thead>
 
-                <tr className="bg-slate-100">
+                <tr>
 
-                  <th className="border p-2">
+                  <th className="p-3 text-left">
                     Producto
                   </th>
 
-                  <th className="border p-2">
+                  <th className="p-3 text-left">
                     Cantidad
                   </th>
 
-                  <th className="border p-2">
+                  <th className="p-3 text-left">
                     Precio Unitario
                   </th>
 
@@ -236,21 +285,22 @@ export default function VentasListado() {
 
                     <tr key={index}>
 
-                      <td className="border p-2">
+                      <td className="p-3">
                         {item.nombre}
                       </td>
 
-                      <td className="border p-2">
+                      <td className="p-3">
                         {item.cantidad}
                       </td>
 
-                      <td className="border p-2">
+                      <td className="p-3">
+
                         $
                         {Number(
-                          item.precio_unitario?.value ||
                           item.precio_unitario ||
                           0
-                        ).toLocaleString()}
+                        ).toLocaleString("es-CL")}
+
                       </td>
 
                     </tr>
@@ -262,14 +312,14 @@ export default function VentasListado() {
 
             </table>
 
-            <div className="mt-4">
+            <div className="mt-6">
 
               <button
                 type="button"
                 onClick={() =>
                   setMostrarModal(false)
                 }
-                className="bg-red-600 text-white px-4 py-2 rounded"
+                className="btn-delete"
               >
                 Cerrar
               </button>

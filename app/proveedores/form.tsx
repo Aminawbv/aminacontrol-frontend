@@ -13,24 +13,25 @@ export default function ProveedoresForm() {
   } = useForm();
 
   const onSubmit = async (data: any) => {
+
     try {
 
       const usuario = JSON.parse(
-  localStorage.getItem("usuario") || "{}"
-);
+        localStorage.getItem("usuario") || "{}"
+      );
 
-await axios.post(
-  "https://aminacontrol-api-729925860477.us-central1.run.app/proveedores",
-  {
-    empresa_id: usuario.empresa_id,
+      await axios.post(
+        "https://aminacontrol-api-729925860477.us-central1.run.app/proveedores",
+        {
+          empresa_id: usuario.empresa_id,
 
-    rut: data.rut,
-    nombre: data.nombre,
-    telefono: data.telefono,
-    email: data.email,
-    direccion: data.direccion,
-  }
-);
+          rut: data.rut,
+          nombre: data.nombre,
+          telefono: data.telefono,
+          email: data.email,
+          direccion: data.direccion,
+        }
+      );
 
       alert("Proveedor creado correctamente");
 
@@ -43,44 +44,95 @@ await axios.post(
       alert("Error al crear proveedor");
 
     }
+
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
-      <div>
-        <label>RUT</label>
-        <input {...register("rut")} className="input" />
+    <form onSubmit={handleSubmit(onSubmit)}>
+
+      <div className="form-card">
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            RUT
+          </label>
+
+          <input
+            {...register("rut")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Nombre
+          </label>
+
+          <input
+            {...register("nombre")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Teléfono
+          </label>
+
+          <input
+            {...register("telefono")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Email
+          </label>
+
+          <input
+            type="email"
+            {...register("email")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Dirección
+          </label>
+
+          <input
+            {...register("direccion")}
+            className="input"
+          />
+
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="btn-primary"
+        >
+          {isSubmitting
+            ? "Guardando..."
+            : "Registrar Proveedor"}
+        </button>
+
       </div>
-
-      <div>
-        <label>Nombre</label>
-        <input {...register("nombre")} className="input" />
-      </div>
-
-      <div>
-        <label>Teléfono</label>
-        <input {...register("telefono")} className="input" />
-      </div>
-
-      <div>
-        <label>Email</label>
-        <input {...register("email")} className="input" />
-      </div>
-
-      <div>
-        <label>Dirección</label>
-        <input {...register("direccion")} className="input" />
-      </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        {isSubmitting ? "Guardando..." : "Registrar Proveedor"}
-      </button>
 
     </form>
+
   );
+
 }

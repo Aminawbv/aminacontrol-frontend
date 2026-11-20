@@ -137,15 +137,15 @@ const editarReceta = (
 
     <tr className="bg-slate-100 text-black">
 
-      <th className="border p-2">
+      <th className="p-3 text-left">
         Producto
       </th>
 
-      <th className="border p-2">
+      <th className="p-3 text-left">
         Rendimiento
       </th>
 
-      <th className="border p-2">
+      <th className="p-3 text-left">
         Acciones
       </th>
 
@@ -159,11 +159,11 @@ const editarReceta = (
 
       <tr key={receta.receta_id}>
 
-        <td className="border p-2">
+        <td className="p-3">
           {receta.producto}
         </td>
 
-        <td className="border p-2">
+        <td className="p-3">
 
           {receta.rendimiento}
 
@@ -173,7 +173,7 @@ const editarReceta = (
 
         </td>
 
-        <td className="border p-2">
+        <td className="p-3">
 
           <button
             onClick={() =>
@@ -181,7 +181,7 @@ const editarReceta = (
                 receta.receta_id
               )
             }
-            className="bg-blue-600 text-white px-2 py-1 rounded mr-2"
+            className="btn-view mr-2"
           >
             Ver
           </button>
@@ -190,7 +190,7 @@ const editarReceta = (
     window.location.href =
       `/recetas/editar/${receta.receta_id}`
   }
-  className="bg-yellow-600 text-white px-2 py-1 rounded mr-2"
+  className="btn-edit mr-2"
 >
   Editar
 </button>
@@ -201,7 +201,7 @@ const editarReceta = (
                 receta.receta_id
               )
             }
-            className="bg-red-600 text-white px-2 py-1 rounded"
+            className="btn-delete"
           >
             Eliminar
           </button>

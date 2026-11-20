@@ -6,135 +6,132 @@ import axios from "axios";
 export default function ProductosListado() {
 
   const [productos, setProductos] = useState<any[]>([]);
-  const [editando, setEditando] =
-  useState<any>(null);
 
   useEffect(() => {
 
-const cargarProductos = async () => {
+    const cargarProductos = async () => {
 
-  try {
+      try {
 
-    const usuario = JSON.parse(
-      localStorage.getItem("usuario") || "{}"
-    );
+        const usuario = JSON.parse(
+          localStorage.getItem("usuario") || "{}"
+        );
 
-    const response = await axios.get(
-      "https://aminacontrol-api-729925860477.us-central1.run.app/productos",
-      {
-        params: {
-          empresa_id: usuario.empresa_id
-        }
+        const response = await axios.get(
+          "https://aminacontrol-api-729925860477.us-central1.run.app/productos",
+          {
+            params: {
+              empresa_id: usuario.empresa_id
+            }
+          }
+        );
+
+        setProductos(response.data);
+
+      } catch (error) {
+
+        console.error(error);
+
       }
-    );
 
-    console.log("PRODUCTOS", response.data);
-
-    setProductos(response.data);
-
-  } catch (error) {
-
-    console.error(error);
-
-  }
-
-};
+    };
 
     cargarProductos();
 
   }, []);
 
-const eliminarProducto = async (
-  idProducto: string
-) => {
+  const eliminarProducto = async (
+    idProducto: string
+  ) => {
 
-  const confirmar = confirm(
-    "¿Desea eliminar este producto?"
-  );
-
-  if (!confirmar) return;
-
-  try {
-
-    await axios.delete(
-      `https://aminacontrol-api-729925860477.us-central1.run.app/productos/${idProducto}`
+    const confirmar = confirm(
+      "¿Desea eliminar este producto?"
     );
 
-    setProductos(
-      productos.filter(
-        (p) =>
-          p.id_producto !== idProducto
-      )
-    );
+    if (!confirmar) return;
 
-  } catch (error) {
+    try {
 
-    console.error(error);
+      await axios.delete(
+        `https://aminacontrol-api-729925860477.us-central1.run.app/productos/${idProducto}`
+      );
 
-  }
+      setProductos(
+        productos.filter(
+          (p) =>
+            p.id_producto !== idProducto
+        )
+      );
 
-};
+    } catch (error) {
 
-const editarProducto = async (
-  producto: any
-) => {
+      console.error(error);
 
-  const nombre = prompt(
-    "Nombre producto",
-    producto.nombre
-  );
-
-  if (!nombre) return;
-
-  const precio = prompt(
-    "Precio venta",
-    producto.precio_venta
-  );
-
-  if (!precio) return;
-
-  await axios.put(
-    `https://aminacontrol-api-729925860477.us-central1.run.app/productos/${producto.id_producto}`,
-    {
-      nombre,
-      precio_venta: Number(precio),
-      tipo_producto:
-        producto.tipo_producto
     }
-  );
 
-  location.reload();
+  };
 
-};
+  const editarProducto = async (
+    producto: any
+  ) => {
+
+    const nombre = prompt(
+      "Nombre producto",
+      producto.nombre
+    );
+
+    if (!nombre) return;
+
+    const precio = prompt(
+      "Precio venta",
+      producto.precio_venta
+    );
+
+    if (!precio) return;
+
+    await axios.put(
+      `https://aminacontrol-api-729925860477.us-central1.run.app/productos/${producto.id_producto}`,
+      {
+        nombre,
+        precio_venta: Number(precio),
+        tipo_producto:
+          producto.tipo_producto
+      }
+    );
+
+    location.reload();
+
+  };
 
   return (
 
-    <div className="mt-8">
+    <div className="list-card mt-8">
 
-      <h2 className="text-xl font-bold mb-4">
+      <h2 className="text-xl font-bold mb-6">
         Productos Registrados
       </h2>
 
-      <table className="w-full border">
+      <table className="w-full">
 
         <thead>
 
-          <tr className="bg-slate-100 text-black">
+          <tr>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Producto
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Tipo
             </th>
 
-            <th className="border p-2">
-  Precio Venta
-</th>  
-<th className="border p-2">
-  Acciones
-</th>
+            <th className="p-3 text-left">
+              Precio Venta
+            </th>
+
+            <th className="p-3 text-left">
+              Acciones
+            </th>
 
           </tr>
 
@@ -144,30 +141,46 @@ const editarProducto = async (
 
           {productos.map((producto) => (
 
-            <tr key={producto.id_producto}>
+            <tr
+              key={producto.id_producto}
+              className="hover:bg-slate-50"
+            >
 
-              <td className="border p-2">
+              <td className="p-3 font-medium">
                 {producto.nombre}
               </td>
 
-              <td className="border p-2">
-  $
-  {Number(
-    producto.precio_venta || 0
-  ).toLocaleString()}
-</td>
-
-              <td className="border p-2">
+              <td className="p-3">
 
                 {producto.tipo_producto === "ELABORADO" ? (
 
-                  <span className="text-green-600 font-bold">
+                  <span
+                    className="
+                    px-3
+                    py-1
+                    rounded-full
+                    text-xs
+                    font-medium
+                    bg-[#E8FAF7]
+                    text-[#12B7A6]
+                    "
+                  >
                     Elaborado
                   </span>
 
                 ) : (
 
-                  <span className="text-blue-600 font-bold">
+                  <span
+                    className="
+                    px-3
+                    py-1
+                    rounded-full
+                    text-xs
+                    font-medium
+                    bg-[#EEF5FF]
+                    text-[#4F83CC]
+                    "
+                  >
                     Reventa
                   </span>
 
@@ -175,31 +188,44 @@ const editarProducto = async (
 
               </td>
 
-<td className="border p-2">
+              <td className="p-3 font-semibold">
 
-  <button
-    onClick={() =>
-      editarProducto(
-        producto
-      )
-    }
-    className="bg-yellow-600 text-white px-2 py-1 rounded mr-2"
-  >
-    Editar
-  </button>
+                $
+                {Number(
+  producto.precio_venta || 0
+).toLocaleString("es-CL")}
 
-  <button
-    onClick={() =>
-      eliminarProducto(
-        producto.id_producto
-      )
-    }
-    className="bg-red-600 text-white px-2 py-1 rounded"
-  >
-    Eliminar
-  </button>
+              </td>
 
-</td>
+              <td className="p-3">
+
+                <div className="flex gap-2">
+
+                  <button
+                    onClick={() =>
+                      editarProducto(
+                        producto
+                      )
+                    }
+                    className="btn-edit"
+                  >
+                    Editar
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      eliminarProducto(
+                        producto.id_producto
+                      )
+                    }
+                    className="btn-delete"
+                  >
+                    Eliminar
+                  </button>
+
+                </div>
+
+              </td>
 
             </tr>
 

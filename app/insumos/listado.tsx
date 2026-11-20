@@ -42,35 +42,45 @@ export default function InsumosListado() {
 
   return (
 
-    <div className="mt-8">
+    <div
+      className="
+      mt-8
+      bg-white
+      rounded-2xl
+      border
+      border-[#E5E7EB]
+      p-6
+      shadow-sm
+      "
+    >
 
-      <h2 className="text-xl font-bold mb-4">
+      <h2 className="text-xl font-bold mb-6">
         Insumos Registrados
       </h2>
 
-      <table className="w-full border">
+      <table className="w-full">
 
         <thead>
 
-          <tr className="bg-slate-100 text-black">
+          <tr>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Nombre
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Unidad
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Costo
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Stock Actual
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Stock Mínimo
             </th>
 
@@ -82,26 +92,46 @@ export default function InsumosListado() {
 
           {insumos.map((insumo) => (
 
-            <tr key={insumo.insumo_id}>
+            <tr
+              key={insumo.insumo_id}
+              className="hover:bg-slate-50"
+            >
 
-              <td className="border p-2">
+              <td className="p-3">
                 {insumo.nombre}
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
                 {insumo.unidad}
               </td>
 
-              <td className="border p-2">
-                ${Number(insumo.costo_unitario).toLocaleString()}
+              <td className="p-3 font-medium">
+                $
+                {Number(
+                  insumo.costo_unitario || 0
+                ).toLocaleString()}
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
                 {insumo.stock_actual}
               </td>
 
-              <td className="border p-2">
-                {insumo.stock_minimo}
+              <td className="p-3">
+
+                <span
+                  className="
+                  px-3
+                  py-1
+                  rounded-full
+                  bg-[#FFF7D6]
+                  text-[#A16207]
+                  text-sm
+                  font-medium
+                  "
+                >
+                  {insumo.stock_minimo}
+                </span>
+
               </td>
 
             </tr>

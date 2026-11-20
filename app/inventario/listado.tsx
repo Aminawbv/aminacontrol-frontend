@@ -5,7 +5,8 @@ import axios from "axios";
 
 export default function InventarioListado() {
 
-  const [movimientos, setMovimientos] = useState<any[]>([]);
+  const [movimientos, setMovimientos] =
+    useState<any[]>([]);
 
   useEffect(() => {
 
@@ -26,7 +27,9 @@ export default function InventarioListado() {
           }
         );
 
-        setMovimientos(response.data);
+        setMovimientos(
+          response.data
+        );
 
       } catch (error) {
 
@@ -42,35 +45,35 @@ export default function InventarioListado() {
 
   return (
 
-    <div className="mt-8">
+    <div className="list-card mt-8">
 
-      <h2 className="text-xl font-bold mb-4">
+      <h2 className="text-xl font-bold mb-6">
         Movimientos de Inventario
       </h2>
 
-      <table className="w-full border">
+      <table className="w-full">
 
         <thead>
 
-          <tr className="bg-slate-100 text-black">
+          <tr>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Fecha
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Tipo
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Insumo
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Cantidad
             </th>
 
-            <th className="border p-2">
+            <th className="p-3 text-left">
               Observación
             </th>
 
@@ -82,28 +85,54 @@ export default function InventarioListado() {
 
           {movimientos.map((movimiento) => (
 
-            <tr key={movimiento.movimiento_id}>
+            <tr
+              key={movimiento.movimiento_id}
+              className="hover:bg-slate-50"
+            >
 
-              <td className="border p-2">
+              <td className="p-3 whitespace-nowrap">
+
                 {movimiento.fecha?.value ||
-                 movimiento.fecha ||
-                 "-"}
+                  movimiento.fecha ||
+                  "-"}
+
               </td>
 
-              <td className="border p-2">
-                {movimiento.tipo_movimiento}
+              <td className="p-3">
+
+                <span
+                  className={
+                    movimiento.tipo_movimiento ===
+                    "SALIDA"
+
+                      ? "px-3 py-1 rounded-full bg-[#FEE2E2] text-[#DC2626] text-sm font-medium"
+
+                      : "px-3 py-1 rounded-full bg-[#E8FAF7] text-[#12B7A6] text-sm font-medium"
+                  }
+                >
+
+                  {movimiento.tipo_movimiento}
+
+                </span>
+
               </td>
 
-              <td className="border p-2">
+              <td className="p-3 font-medium">
+
                 {movimiento.insumo}
+
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
+
                 {movimiento.cantidad}
+
               </td>
 
-              <td className="border p-2">
-                {movimiento.observacion}
+              <td className="p-3">
+
+                {movimiento.observacion || "-"}
+
               </td>
 
             </tr>

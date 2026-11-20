@@ -7,7 +7,8 @@ export default function ProductosForm() {
 
   const [nombre, setNombre] = useState("");
 
-  const [precioVenta, setPrecioVenta] = useState("");
+  const [precioVenta, setPrecioVenta] =
+    useState("");
 
   const [tipoProducto, setTipoProducto] =
     useState("ELABORADO");
@@ -34,70 +35,99 @@ export default function ProductosForm() {
 
       location.reload();
 
-   } catch (error: any) {
+    } catch (error: any) {
 
-  console.error(
-    "ERROR PRODUCTO:",
-    error?.response?.data
-  );
+      console.error(
+        "ERROR PRODUCTO:",
+        error?.response?.data
+      );
 
-  alert(
-    JSON.stringify(
-      error?.response?.data,
-      null,
-      2
-    )
-  );
+      alert(
+        JSON.stringify(
+          error?.response?.data,
+          null,
+          2
+        )
+      );
 
-}
+    }
 
   };
 
   return (
 
-    <div className="space-y-4">
+    <div className="form-card">
 
-      <input
-        placeholder="Nombre"
-        value={nombre}
-        onChange={(e) =>
-          setNombre(e.target.value)
-        }
-        className="border p-2 w-full"
-      />
+      <div className="mb-6 form-field">
 
-      <input
-        placeholder="Precio Venta"
-        value={precioVenta}
-        onChange={(e) =>
-          setPrecioVenta(e.target.value)
-        }
-        className="border p-2 w-full"
-      />
+        <label className="block mb-2">
+          Nombre
+        </label>
 
-      <select
-        value={tipoProducto}
-        onChange={(e) =>
-          setTipoProducto(e.target.value)
-        }
-        className="border p-2 w-full"
-      >
+        <input
+          value={nombre}
+          onChange={(e) =>
+            setNombre(e.target.value)
+          }
+          className="input"
+          placeholder="Nombre del producto"
+        />
 
-        <option value="ELABORADO">
-          Elaborado
-        </option>
+      </div>
 
-        <option value="REVENTA">
-          Reventa
-        </option>
+      <div className="mb-6 form-field">
 
-      </select>
+        <label className="block mb-2">
+          Precio Venta
+        </label>
+
+        <input
+          type="number"
+          value={precioVenta}
+          onChange={(e) =>
+            setPrecioVenta(
+              e.target.value
+            )
+          }
+          className="input"
+          placeholder="0"
+        />
+
+      </div>
+
+      <div className="mb-6 form-field">
+
+        <label className="block mb-2">
+          Tipo de Producto
+        </label>
+
+        <select
+          value={tipoProducto}
+          onChange={(e) =>
+            setTipoProducto(
+              e.target.value
+            )
+          }
+          className="input"
+        >
+
+          <option value="ELABORADO">
+            Elaborado
+          </option>
+
+          <option value="REVENTA">
+            Reventa
+          </option>
+
+        </select>
+
+      </div>
 
       <button
         onClick={guardar}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="btn-primary"
       >
-        Guardar
+        Registrar Producto
       </button>
 
     </div>

@@ -179,9 +179,15 @@ export default function RecetasForm() {
 
   return (
 
-    <div className="space-y-6">
+    <div className=" bg-white
+    rounded-2xl
+    border
+    border-[#E5E7EB]
+    shadow-sm
+    p-6
+    max-w-4xl">
 
-      <div>
+      <div className="mb-6">
 
         <label className="block mb-2">
 
@@ -196,7 +202,7 @@ export default function RecetasForm() {
               e.target.value
             )
           }
-          className="border p-2 w-full"
+          className="input"
         >
 
           <option value="">
@@ -224,7 +230,7 @@ export default function RecetasForm() {
 
       </div>
 
-      <div>
+      <div className="mb-6">
 
         <label className="block mb-2">
 
@@ -240,12 +246,12 @@ export default function RecetasForm() {
               e.target.value
             )
           }
-          className="border p-2 w-full"
+          className="input"
         />
 
       </div>
 
-          <div>
+          <div className="mb-6">
 
   <label className="block mb-2">
 
@@ -260,7 +266,7 @@ export default function RecetasForm() {
         e.target.value
       )
     }
-    className="border p-2 w-full"
+    className="input"
   >
 
     <option value="porciones">
@@ -285,148 +291,117 @@ export default function RecetasForm() {
 
       <div>
 
-        <h3 className="font-bold text-lg mb-4">
+  <h3 className="font-bold text-lg mb-4">
+    Insumos
+  </h3>
 
-          Insumos
+  {detalles.map((detalle, index) => (
 
-        </h3>
+    <div
+      key={index}
+      className="grid grid-cols-4 gap-2 mb-2"
+    >
 
-        {detalles.map(
-          (detalle, index) => (
-
-            <div
-              key={index}
-              className="grid grid-cols-4 gap-2 mb-2"
-            >
-
-              <select
-                value={
-                  detalle.insumo_id
-                }
-                onChange={(e) =>
-                  actualizarDetalle(
-                    index,
-                    "insumo_id",
-                    e.target.value
-                  )
-                }
-                className="border p-2"
-              >
-
-                <option value="">
-                  Insumo
-                </option>
-
-                {insumos.map(
-                  (insumo) => (
-
-                    <option
-                      key={
-                        insumo.insumo_id
-                      }
-                      value={
-                        insumo.insumo_id
-                      }
-                    >
-                      {insumo.nombre}
-                    </option>
-
-                  )
-                )}
-
-              </select>
-
-              <input
-                type="number"
-                placeholder="Cantidad"
-                value={
-                  detalle.cantidad
-                }
-                onChange={(e) =>
-                  actualizarDetalle(
-                    index,
-                    "cantidad",
-                    e.target.value
-                  )
-                }
-                className="border p-2"
-              />
-
-              <select
-                value={
-                  detalle.unidad
-                }
-                onChange={(e) =>
-                  actualizarDetalle(
-                    index,
-                    "unidad",
-                    e.target.value
-                  )
-                }
-                className="border p-2"
-              >
-
-                <option value="kg">
-                  kg
-                </option>
-
-                <option value="gr">
-                  gr
-                </option>
-
-                <option value="lt">
-                  lt
-                </option>
-
-                <option value="ml">
-                  ml
-                </option>
-
-                <option value="unidad">
-                  unidad
-                </option>
-
-              </select>
-
-              <button
-                type="button"
-                onClick={() =>
-                  eliminarInsumo(
-                    index
-                  )
-                }
-                className="bg-red-600 text-white rounded px-2"
-              >
-                X
-              </button>
-
-            </div>
-
+      <select
+        value={detalle.insumo_id}
+        onChange={(e) =>
+          actualizarDetalle(
+            index,
+            "insumo_id",
+            e.target.value
           )
-        )}
+        }
+        className="input"
+      >
 
-        <button
-          type="button"
-          onClick={
-            agregarInsumo
-          }
-          className="bg-green-600 text-white px-4 py-2 rounded mt-2"
-        >
-          + Agregar Insumo
-        </button>
+        <option value="">
+          Insumo
+        </option>
 
-      </div>
+        {insumos.map((insumo) => (
+
+          <option
+            key={insumo.insumo_id}
+            value={insumo.insumo_id}
+          >
+            {insumo.nombre}
+          </option>
+
+        ))}
+
+      </select>
+
+      <input
+        type="number"
+        placeholder="Cantidad"
+        value={detalle.cantidad}
+        onChange={(e) =>
+          actualizarDetalle(
+            index,
+            "cantidad",
+            e.target.value
+          )
+        }
+        className="input"
+      />
+
+      <select
+        value={detalle.unidad}
+        onChange={(e) =>
+          actualizarDetalle(
+            index,
+            "unidad",
+            e.target.value
+          )
+        }
+        className="input"
+      >
+
+        <option value="kg">kg</option>
+        <option value="gr">gr</option>
+        <option value="lt">lt</option>
+        <option value="ml">ml</option>
+        <option value="unidad">unidad</option>
+
+      </select>
 
       <button
         type="button"
-        onClick={guardar}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        onClick={() =>
+          eliminarInsumo(index)
+        }
+        className="btn-delete"
       >
-        Guardar Receta
+        X
       </button>
 
     </div>
 
-  );
+  ))}
 
+  <div className="flex gap-3 mt-6">
+
+    <button
+      type="button"
+      onClick={agregarInsumo}
+      className="btn-primary"
+    >
+      + Agregar Insumo
+    </button>
+
+    <button
+      type="button"
+      onClick={guardar}
+      className="btn-primary"
+    >
+      Guardar Receta
+    </button>
+
+  </div>
+
+</div>
+
+</div>
+
+);
 }

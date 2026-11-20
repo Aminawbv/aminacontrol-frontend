@@ -216,7 +216,14 @@ export default function EditarRecetaPage() {
 
   return (
 
-    <div className="max-w-4xl mx-auto">
+    <div className=" max-w-4xl
+  mx-auto
+  bg-white
+  rounded-2xl
+  border
+  border-[#E5E7EB]
+  shadow-sm
+  p-8">
 
       <h1 className="text-2xl font-bold mb-6">
 
@@ -236,15 +243,15 @@ export default function EditarRecetaPage() {
         </label>
 
         <input
-          type="number"
-          value={rendimiento}
-          onChange={(e) =>
-            setRendimiento(
-              e.target.value
-            )
-          }
-          className="border p-2 w-full"
-        />
+  type="number"
+  value={rendimiento}
+  onChange={(e) =>
+    setRendimiento(
+      e.target.value
+    )
+  }
+  className="input"
+/>
 
       </div>
 
@@ -265,7 +272,7 @@ export default function EditarRecetaPage() {
               e.target.value
             )
           }
-          className="border p-2 w-full"
+          className="input"
         >
 
           <option value="porciones">
@@ -299,7 +306,11 @@ export default function EditarRecetaPage() {
 
           <div
             key={index}
-            className="grid grid-cols-4 gap-2 mb-2"
+            className="grid
+grid-cols-4
+gap-3
+mb-3
+items-center"
           >
 
             <select
@@ -313,7 +324,7 @@ export default function EditarRecetaPage() {
                   e.target.value
                 )
               }
-              className="border p-2"
+              className="input"
             >
 
               <option value="">
@@ -351,7 +362,7 @@ export default function EditarRecetaPage() {
                   e.target.value
                 )
               }
-              className="border p-2"
+              className="input"
             />
 
             <select
@@ -365,7 +376,7 @@ export default function EditarRecetaPage() {
                   e.target.value
                 )
               }
-              className="border p-2"
+              className="input"
             >
 
               <option value="kg">
@@ -397,7 +408,7 @@ export default function EditarRecetaPage() {
                   index
                 )
               }
-              className="bg-red-600 text-white rounded px-2"
+              className="btn-delete"
             >
               X
             </button>
@@ -412,18 +423,18 @@ export default function EditarRecetaPage() {
         onClick={
           agregarInsumo
         }
-        className="bg-green-600 text-white px-4 py-2 rounded mt-4 mr-4"
+        className="btn-primary mr-4"
       >
         + Agregar Insumo
       </button>
 
       <button
-        type="button"
-        onClick={guardar}
-        className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
-      >
-        Guardar Cambios
-      </button>
+  type="button"
+  onClick={guardar}
+  className="bg-red-500 text-white"
+>
+  Guardar Cambios
+</button>
 
     </div>
 

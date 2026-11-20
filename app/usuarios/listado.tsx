@@ -33,25 +33,43 @@ export default function UsuariosListado() {
 
   return (
 
-    <div className="mt-8">
+    <div
+      className="
+      mt-8
+      bg-white
+      rounded-2xl
+      border
+      border-[#E5E7EB]
+      p-6
+      shadow-sm
+      "
+    >
 
-      <h2 className="text-xl font-bold mb-4">
+      <h2 className="text-xl font-bold mb-6">
         Usuarios Registrados
       </h2>
 
-      <table className="w-full border">
+      <table className="w-full">
 
         <thead>
 
-          <tr className="bg-slate-100 text-black">
+          <tr>
 
-            <th className="border p-2">Nombre</th>
+            <th className="p-3 text-left">
+              Nombre
+            </th>
 
-            <th className="border p-2">Email</th>
+            <th className="p-3 text-left">
+              Email
+            </th>
 
-            <th className="border p-2">Rol</th>
+            <th className="p-3 text-left">
+              Rol
+            </th>
 
-            <th className="border p-2">Empresa</th>
+            <th className="p-3 text-left">
+              Empresa
+            </th>
 
           </tr>
 
@@ -61,21 +79,38 @@ export default function UsuariosListado() {
 
           {usuarios.map((usuario) => (
 
-            <tr key={usuario.id}>
+            <tr
+              key={usuario.id}
+              className="hover:bg-slate-50"
+            >
 
-              <td className="border p-2">
+              <td className="p-3 font-medium">
                 {usuario.nombre}
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
                 {usuario.email}
               </td>
 
-              <td className="border p-2">
-                {usuario.rol}
+              <td className="p-3">
+
+                <span
+                  className="
+                  px-3
+                  py-1
+                  rounded-full
+                  bg-[#E8FAF7]
+                  text-[#12B7A6]
+                  text-sm
+                  font-medium
+                  "
+                >
+                  {usuario.rol}
+                </span>
+
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
                 {usuario.empresa_id}
               </td>
 

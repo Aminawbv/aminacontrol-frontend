@@ -5,7 +5,8 @@ import axios from "axios";
 
 export default function RentabilidadPage() {
 
-  const [productos, setProductos] = useState<any[]>([]);
+  const [productos, setProductos] =
+    useState<any[]>([]);
 
   useEffect(() => {
 
@@ -26,7 +27,9 @@ export default function RentabilidadPage() {
           }
         );
 
-        setProductos(response.data);
+        setProductos(
+          response.data
+        );
 
       } catch (error) {
 
@@ -42,67 +45,90 @@ export default function RentabilidadPage() {
 
   return (
 
-    <div className="max-w-6xl mx-auto py-10">
+    <div className="max-w-7xl mx-auto py-10">
 
       <h1 className="text-3xl font-bold mb-6">
         Rentabilidad de Productos
       </h1>
 
-      <table className="w-full border">
+      <div className="list-card">
 
-        <thead>
+        <table className="w-full">
 
-          <tr className="bg-slate-100 text-black">
+          <thead>
 
-            <th className="border p-2">
-              Producto
-            </th>
+            <tr>
 
-            <th className="border p-2">
-              Cantidad Vendida
-            </th>
+              <th className="p-3 text-left">
+                Producto
+              </th>
 
-            <th className="border p-2">
-              Ingresos
-            </th>
+              <th className="p-3 text-left">
+                Cantidad Vendida
+              </th>
 
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          {productos.map((producto, index) => (
-
-            <tr key={index}>
-
-              <td className="border p-2">
-                {producto.nombre}
-              </td>
-
-              <td className="border p-2">
-                {producto.cantidad_vendida}
-              </td>
-
-              <td className="border p-2">
-
-                $
-
-                {Number(
-                  producto.ingresos?.value ||
-                  producto.ingresos ||
-                  0
-                ).toLocaleString()}
-
-              </td>
+              <th className="p-3 text-left">
+                Ingresos
+              </th>
 
             </tr>
 
-          ))}
+          </thead>
 
-        </tbody>
+          <tbody>
 
-      </table>
+            {productos.map(
+              (producto, index) => (
+
+                <tr
+                  key={index}
+                  className="hover:bg-slate-50"
+                >
+
+                  <td className="p-3 font-medium">
+                    {producto.nombre}
+                  </td>
+
+                  <td className="p-3">
+
+                    <span
+                      className="
+                      px-3
+                      py-1
+                      rounded-full
+                      bg-[#E8FAF7]
+                      text-[#12B7A6]
+                      text-sm
+                      font-medium
+                      "
+                    >
+                      {producto.cantidad_vendida}
+                    </span>
+
+                  </td>
+
+                  <td className="p-3 font-semibold">
+
+                    $
+
+                    {Number(
+  producto.ingresos ||
+  0
+).toLocaleString("es-CL")}
+
+
+                  </td>
+
+                </tr>
+
+              )
+            )}
+
+          </tbody>
+
+        </table>
+
+      </div>
 
     </div>
 

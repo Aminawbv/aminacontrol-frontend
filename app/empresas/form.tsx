@@ -48,150 +48,200 @@ export default function EmpresasForm() {
 
   return (
 
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4"
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
 
-      <div>
-        <label>ID Empresa</label>
-        <input
-          {...register("empresa_id")}
-          className="input"
-          placeholder="Ej: PIZ001"
-        />
-      </div>
+      <div className="form-card">
 
-      <div>
-        <label>RUT</label>
-        <input
-          {...register("rut")}
-          className="input"
-          placeholder="76XXXXXX-X"
-        />
-      </div>
+        <div className="mb-6 form-field">
 
-      <div>
-        <label>Razón Social</label>
-        <input
-          {...register("razon_social")}
-          className="input"
-        />
-      </div>
+          <label className="block mb-2">
+            ID Empresa
+          </label>
 
-      <div>
-        <label>Nombre Comercial</label>
-        <input
-          {...register("nombre_comercial")}
-          className="input"
-        />
-      </div>
+          <input
+            {...register("empresa_id")}
+            className="input"
+            placeholder="Ej: PIZ001"
+          />
 
-      <div>
-        <label>Giro</label>
-        <input
-          {...register("giro")}
-          className="input"
-        />
-      </div>
+        </div>
 
-      <div>
-        <label>Email</label>
-        <input
-          type="email"
-          {...register("email")}
-          className="input"
-        />
-      </div>
+        <div className="mb-6 form-field">
 
-      <div>
-        <label>Teléfono</label>
-        <input
-          {...register("telefono")}
-          className="input"
-        />
-      </div>
+          <label className="block mb-2">
+            RUT
+          </label>
 
-      <div>
-        <label>Dirección</label>
-        <input
-          {...register("direccion")}
-          className="input"
-        />
-      </div>
+          <input
+            {...register("rut")}
+            className="input"
+            placeholder="76XXXXXX-X"
+          />
 
-      <div>
-        <label>Ciudad</label>
-        <input
-          {...register("ciudad")}
-          className="input"
-        />
-      </div>
+        </div>
 
-      <div>
-        <label>Rubro</label>
+        <div className="mb-6 form-field">
 
-        <select
-          {...register("rubro")}
-          className="input"
+          <label className="block mb-2">
+            Razón Social
+          </label>
+
+          <input
+            {...register("razon_social")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Nombre Comercial
+          </label>
+
+          <input
+            {...register("nombre_comercial")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Giro
+          </label>
+
+          <input
+            {...register("giro")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Email
+          </label>
+
+          <input
+            type="email"
+            {...register("email")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Teléfono
+          </label>
+
+          <input
+            {...register("telefono")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Dirección
+          </label>
+
+          <input
+            {...register("direccion")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Ciudad
+          </label>
+
+          <input
+            {...register("ciudad")}
+            className="input"
+          />
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Rubro
+          </label>
+
+          <select
+            {...register("rubro")}
+            className="input"
+          >
+
+            <option value="">
+              Seleccione
+            </option>
+
+            <option value="Pizzeria">
+              Pizzería
+            </option>
+
+            <option value="Panaderia">
+              Panadería
+            </option>
+
+            <option value="Pasteleria">
+              Pastelería
+            </option>
+
+            <option value="Carniceria">
+              Carnicería
+            </option>
+
+            <option value="Restaurant">
+              Restaurant
+            </option>
+
+            <option value="Completos">
+              Completos
+            </option>
+
+            <option value="Cafeteria">
+              Cafetería
+            </option>
+
+            <option value="Topografia">
+              Topografía
+            </option>
+
+            <option value="Gimnasio">
+              Gimnasio
+            </option>
+
+            <option value="Otro">
+              Otro
+            </option>
+
+          </select>
+
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="btn-primary"
         >
-          <option value="">
-            Seleccione
-          </option>
-
-          <option value="Pizzeria">
-            Pizzería
-          </option>
-
-          <option value="Panaderia">
-            Panadería
-          </option>
-
-          <option value="Pasteleria">
-            Pastelería
-          </option>
-
-          <option value="Carniceria">
-            Carnicería
-          </option>
-
-          <option value="Restaurant">
-            Restaurant
-          </option>
-
-          <option value="Completos">
-            Completos
-          </option>
-
-          <option value="Cafeteria">
-            Cafetería
-          </option>
-
-          <option value="Topografia">
-            Topografía
-          </option>
-
-          <option value="Gimnasio">
-            Gimnasio
-          </option>
-
-          <option value="Otro">
-            Otro
-          </option>
-
-        </select>
+          {isSubmitting
+            ? "Guardando..."
+            : "Registrar Empresa"}
+        </button>
 
       </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        {isSubmitting
-          ? "Guardando..."
-          : "Registrar Empresa"}
-      </button>
 
     </form>
 

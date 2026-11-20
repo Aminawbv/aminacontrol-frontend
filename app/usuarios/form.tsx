@@ -70,107 +70,127 @@ export default function UsuariosForm() {
 
   return (
 
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4"
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
 
-      <div>
-        <label>Nombre</label>
+      <div className="form-card">
 
-        <input
-          {...register("nombre")}
-          className="input"
-        />
-      </div>
+        <div className="mb-6 form-field">
 
-      <div>
-        <label>Email</label>
+          <label className="block mb-2">
+            Nombre
+          </label>
 
-        <input
-          type="email"
-          {...register("email")}
-          className="input"
-        />
-      </div>
+          <input
+            {...register("nombre")}
+            className="input"
+          />
 
-      <div>
-        <label>Contraseña</label>
+        </div>
 
-        <input
-          type="password"
-          {...register("password")}
-          className="input"
-        />
-      </div>
+        <div className="mb-6 form-field">
 
-      <div>
-        <label>Rol</label>
+          <label className="block mb-2">
+            Email
+          </label>
 
-        <select
-          {...register("rol")}
-          className="input"
-        >
-          <option value="">
-            Seleccione
-          </option>
+          <input
+            type="email"
+            {...register("email")}
+            className="input"
+          />
 
-          <option value="admin">
-            Administrador
-          </option>
+        </div>
 
-          <option value="gerencia">
-            Gerencia
-          </option>
+        <div className="mb-6 form-field">
 
-          <option value="bodega">
-            Bodega
-          </option>
+          <label className="block mb-2">
+            Contraseña
+          </label>
 
-          <option value="produccion">
-            Producción
-          </option>
+          <input
+            type="password"
+            {...register("password")}
+            className="input"
+          />
 
-        </select>
+        </div>
 
-      </div>
+        <div className="mb-6 form-field">
 
-      <div>
-        <label>Empresa</label>
+          <label className="block mb-2">
+            Rol
+          </label>
 
-        <select
-          {...register("empresa_id")}
-          className="input"
-        >
+          <select
+            {...register("rol")}
+            className="input"
+          >
 
-          <option value="">
-            Seleccione
-          </option>
-
-          {empresas.map((empresa) => (
-
-            <option
-              key={empresa.empresa_id}
-              value={empresa.empresa_id}
-            >
-              {empresa.nombre_comercial}
+            <option value="">
+              Seleccione
             </option>
 
-          ))}
+            <option value="admin">
+              Administrador
+            </option>
 
-        </select>
+            <option value="gerencia">
+              Gerencia
+            </option>
+
+            <option value="bodega">
+              Bodega
+            </option>
+
+            <option value="produccion">
+              Producción
+            </option>
+
+          </select>
+
+        </div>
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Empresa
+          </label>
+
+          <select
+            {...register("empresa_id")}
+            className="input"
+          >
+
+            <option value="">
+              Seleccione
+            </option>
+
+            {empresas.map((empresa) => (
+
+              <option
+                key={empresa.empresa_id}
+                value={empresa.empresa_id}
+              >
+                {empresa.nombre_comercial}
+              </option>
+
+            ))}
+
+          </select>
+
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="btn-primary"
+        >
+          {isSubmitting
+            ? "Guardando..."
+            : "Registrar Usuario"}
+        </button>
 
       </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        {isSubmitting
-          ? "Guardando..."
-          : "Registrar Usuario"}
-      </button>
 
     </form>
 

@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Mail, Lock } from "lucide-react";
 
 export default function LoginForm() {
 
@@ -36,15 +37,15 @@ export default function LoginForm() {
         JSON.stringify(response.data.usuario)
       );
 
-      alert("Login exitoso");
-
       router.push("/dashboard");
 
     } catch (error) {
 
       console.error(error);
 
-      alert("Usuario o contraseña incorrecta");
+      alert(
+        "Usuario o contraseña incorrecta"
+      );
 
     }
 
@@ -54,41 +55,139 @@ export default function LoginForm() {
 
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4"
+      className="space-y-6"
     >
 
       <div>
 
-        <label>Email</label>
+        <label
+          className="
+          block
+          text-sm
+          font-medium
+          text-slate-700
+          mb-2
+          "
+        >
+          Email
+        </label>
 
-        <input
-          type="email"
-          {...register("email")}
-          className="input"
-        />
+        <div className="relative">
+
+          <Mail
+            size={20}
+            className="
+            absolute
+            left-4
+            top-1/2
+            -translate-y-1/2
+            text-slate-400
+            "
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+            {...register("email")}
+            className="
+            w-full
+            border
+            border-gray-200
+            rounded-xl
+            pl-12
+            pr-4
+            py-3
+            bg-white
+            focus:outline-none
+            focus:ring-2
+            focus:ring-[#B5FFFF]
+            "
+          />
+
+        </div>
 
       </div>
 
       <div>
 
-        <label>Contraseña</label>
+        <div className="flex justify-between mb-2">
 
-        <input
-          type="password"
-          {...register("password")}
-          className="input"
-        />
+          <label
+            className="
+            text-sm
+            font-medium
+            text-slate-700
+            "
+          >
+            Contraseña
+          </label>
+
+          <button
+            type="button"
+            className="
+            text-sm
+            text-[#5DC1B9]
+            hover:underline
+            "
+          >
+            ¿Olvidaste tu contraseña?
+          </button>
+
+        </div>
+
+        <div className="relative">
+
+          <Lock
+            size={20}
+            className="
+            absolute
+            left-4
+            top-1/2
+            -translate-y-1/2
+            text-slate-400
+            "
+          />
+
+          <input
+            type="password"
+            placeholder="Contraseña"
+            {...register("password")}
+            className="
+            w-full
+            border
+            border-gray-200
+            rounded-xl
+            pl-12
+            pr-4
+            py-3
+            bg-white
+            focus:outline-none
+            focus:ring-2
+            focus:ring-[#B5FFFF]
+            "
+          />
+
+        </div>
 
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-blue-600 text-white px-4 py-2 rounded w-full"
+        className="
+        w-full
+        py-3
+        rounded-xl
+        bg-[#5DC1B9]
+        hover:bg-[#4DAAA3]
+        text-white
+        font-medium
+        transition
+        "
       >
         {isSubmitting
           ? "Ingresando..."
-          : "Ingresar"}
+          : "Acceder"}
       </button>
 
     </form>

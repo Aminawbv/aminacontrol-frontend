@@ -42,25 +42,43 @@ export default function ClientesListado() {
 
   return (
 
-    <div className="mt-8">
+    <div
+      className="
+      mt-8
+      bg-white
+      rounded-2xl
+      border
+      border-[#E5E7EB]
+      p-6
+      shadow-sm
+      "
+    >
 
-      <h2 className="text-xl font-bold mb-4">
+      <h2 className="text-xl font-bold mb-6">
         Clientes Registrados
       </h2>
 
-      <table className="w-full border">
+      <table className="w-full">
 
         <thead>
 
-          <tr className="bg-slate-100">
+          <tr>
 
-            <th className="border p-2">RUT</th>
+            <th className="p-3 text-left">
+              RUT
+            </th>
 
-            <th className="border p-2">Nombre</th>
+            <th className="p-3 text-left">
+              Nombre
+            </th>
 
-            <th className="border p-2">Teléfono</th>
+            <th className="p-3 text-left">
+              Teléfono
+            </th>
 
-            <th className="border p-2">Email</th>
+            <th className="p-3 text-left">
+              Email
+            </th>
 
           </tr>
 
@@ -70,21 +88,24 @@ export default function ClientesListado() {
 
           {clientes.map((cliente) => (
 
-            <tr key={cliente.cliente_id}>
+            <tr
+              key={cliente.cliente_id}
+              className="hover:bg-slate-50"
+            >
 
-              <td className="border p-2">
+              <td className="p-3">
                 {cliente.rut}
               </td>
 
-              <td className="border p-2">
+              <td className="p-3 font-medium">
                 {cliente.nombre}
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
                 {cliente.telefono}
               </td>
 
-              <td className="border p-2">
+              <td className="p-3">
                 {cliente.email}
               </td>
 
