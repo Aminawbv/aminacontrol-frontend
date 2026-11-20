@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 import {
   Building2,
@@ -81,10 +82,11 @@ const textClass = (path: string) =>
   "
 >
 
-<img
+<Image
   src="/favicon.ico"
   alt="Amina"
-  className="w-14 h-14"
+  width={56}
+  height={56}
 />
 
   <span
