@@ -27,9 +27,6 @@ export default function RentabilidadPage() {
           }
         );
 
-console.log("Usuario:", usuario);
-console.log("Empresa:", usuario.empresa_id);
-console.log("Rentabilidad:", response.data);
 
         setProductos(
           response.data

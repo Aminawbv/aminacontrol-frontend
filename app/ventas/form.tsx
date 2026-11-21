@@ -36,9 +36,20 @@ export default function VentasForm() {
 
       try {
 
-        const response = await axios.get(
-          "https://aminacontrol-api-729925860477.us-central1.run.app/productos"
-        );
+        const usuario = JSON.parse(
+  localStorage.getItem("usuario") || "{}"
+);
+
+const response = await axios.get(
+  "https://aminacontrol-api-729925860477.us-central1.run.app/productos",
+  {
+    params: {
+      empresa_id: usuario.empresa_id,
+    },
+  }
+);
+
+console.log("PRODUCTOS:", response.data);
 
         setProductos(
           response.data
