@@ -10,6 +10,15 @@ export default function ProductosForm() {
   const [precioVenta, setPrecioVenta] =
     useState("");
 
+  const [costoUnitario, setCostoUnitario] =
+    useState("");
+
+  const [stockInicial, setStockInicial] =
+    useState("");
+
+  const [stockMinimo, setStockMinimo] =
+    useState("");
+
   const [tipoProducto, setTipoProducto] =
     useState("ELABORADO");
 
@@ -25,9 +34,25 @@ export default function ProductosForm() {
         "https://aminacontrol-api-729925860477.us-central1.run.app/productos",
         {
           empresa_id: usuario.empresa_id,
+
           nombre,
-          precio_venta: Number(precioVenta),
-          tipo_producto: tipoProducto
+
+          precio_venta:
+            Number(precioVenta),
+
+          costo_unitario:
+            tipoProducto === "REVENTA"
+              ? Number(costoUnitario)
+              : 0,
+
+          stock_inicial:
+            Number(stockInicial),
+
+          stock_minimo:
+            Number(stockMinimo),
+
+          tipo_producto:
+            tipoProducto
         }
       );
 
@@ -120,6 +145,70 @@ export default function ProductosForm() {
           </option>
 
         </select>
+
+      </div>
+
+      {tipoProducto === "REVENTA" && (
+
+        <div className="mb-6 form-field">
+
+          <label className="block mb-2">
+            Costo Unitario
+          </label>
+
+          <input
+            type="number"
+            value={costoUnitario}
+            onChange={(e) =>
+              setCostoUnitario(
+                e.target.value
+              )
+            }
+            className="input"
+            placeholder="0"
+          />
+
+        </div>
+
+      )}
+
+      <div className="mb-6 form-field">
+
+        <label className="block mb-2">
+          Stock Inicial
+        </label>
+
+        <input
+          type="number"
+          value={stockInicial}
+          onChange={(e) =>
+            setStockInicial(
+              e.target.value
+            )
+          }
+          className="input"
+          placeholder="0"
+        />
+
+      </div>
+
+      <div className="mb-6 form-field">
+
+        <label className="block mb-2">
+          Stock Mínimo
+        </label>
+
+        <input
+          type="number"
+          value={stockMinimo}
+          onChange={(e) =>
+            setStockMinimo(
+              e.target.value
+            )
+          }
+          className="input"
+          placeholder="0"
+        />
 
       </div>
 

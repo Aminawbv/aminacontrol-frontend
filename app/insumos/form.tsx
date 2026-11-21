@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 export default function InsumosForm() {
-
   const {
     register,
     handleSubmit,
@@ -13,9 +12,7 @@ export default function InsumosForm() {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-
     try {
-
       const usuario = JSON.parse(
         localStorage.getItem("usuario") || "{}"
       );
@@ -28,6 +25,10 @@ export default function InsumosForm() {
           nombre: data.nombre,
 
           unidad: data.unidad,
+
+          costo_unitario: Number(
+            data.costo_unitario
+          ),
 
           stock_minimo: Number(
             data.stock_minimo
@@ -50,19 +51,15 @@ export default function InsumosForm() {
       );
 
     }
-
   };
 
   return (
-
     <form
       onSubmit={handleSubmit(onSubmit)}
     >
-
       <div className="form-card">
 
         <div className="mb-6 form-field">
-
           <label className="block mb-2">
             Nombre
           </label>
@@ -71,11 +68,9 @@ export default function InsumosForm() {
             {...register("nombre")}
             className="input"
           />
-
         </div>
 
         <div className="mb-6 form-field">
-
           <label className="block mb-2">
             Unidad
           </label>
@@ -84,7 +79,6 @@ export default function InsumosForm() {
             {...register("unidad")}
             className="input"
           >
-
             <option value="">
               Seleccione
             </option>
@@ -112,13 +106,23 @@ export default function InsumosForm() {
             <option value="caja">
               Caja
             </option>
-
           </select>
-
         </div>
 
         <div className="mb-6 form-field">
+          <label className="block mb-2">
+            Costo Unitario
+          </label>
 
+          <input
+            type="number"
+            step="0.01"
+            {...register("costo_unitario")}
+            className="input"
+          />
+        </div>
+
+        <div className="mb-6 form-field">
           <label className="block mb-2">
             Stock Mínimo
           </label>
@@ -128,7 +132,6 @@ export default function InsumosForm() {
             {...register("stock_minimo")}
             className="input"
           />
-
         </div>
 
         <button
@@ -142,9 +145,6 @@ export default function InsumosForm() {
         </button>
 
       </div>
-
     </form>
-
   );
-
 }

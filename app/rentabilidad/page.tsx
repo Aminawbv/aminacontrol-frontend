@@ -22,6 +22,8 @@ export default function RentabilidadPage() {
           }
         );
 
+        console.log("RENTABILIDAD:", response.data);
+
         setProductos(response.data);
       } catch (error) {
         console.error(error);

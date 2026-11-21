@@ -116,9 +116,15 @@ console.log("PRODUCTOS:", response.data);
         error
       );
 
-      alert(
-        "Error al registrar la venta"
-      );
+      console.error(error);
+
+alert(
+  JSON.stringify(
+    error?.response?.data,
+    null,
+    2
+  )
+);
 
     }
 
