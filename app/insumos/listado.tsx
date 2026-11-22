@@ -7,7 +7,69 @@ export default function InsumosListado() {
 
   const [insumos, setInsumos] = useState<any[]>([]);
 
+  const eliminarInsumo = async (
+  insumoId: string
+) => {
+
+  const confirmar = confirm(
+    "¿Eliminar insumo?"
+  );
+
+  if (!confirmar) return;
+
+  try {
+
+    await axios.delete(
+      `https://aminacontrol-api-729925860477.us-central1.run.app/insumos/${insumoId}`
+    );
+
+    setInsumos(
+      insumos.filter(
+        (i) =>
+          i.insumo_id !== insumoId
+      )
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+};
+
   useEffect(() => {
+
+    const eliminarInsumo = async (
+  insumoId: string
+) => {
+
+  const confirmar = confirm(
+    "¿Eliminar insumo?"
+  );
+
+  if (!confirmar) return;
+
+  try {
+
+    await axios.delete(
+      `https://aminacontrol-api-729925860477.us-central1.run.app/insumos/${insumoId}`
+    );
+
+    setInsumos(
+      insumos.filter(
+        (i) =>
+          i.insumo_id !== insumoId
+      )
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+};
 
     const cargarInsumos = async () => {
 
@@ -84,6 +146,10 @@ export default function InsumosListado() {
               Stock Mínimo
             </th>
 
+            <th className="p-3 text-left">
+  Acciones
+</th>
+
           </tr>
 
         </thead>
@@ -133,6 +199,28 @@ export default function InsumosListado() {
                 </span>
 
               </td>
+
+                  <td className="p-3">
+
+  <button
+    onClick={() =>
+      eliminarInsumo(
+        insumo.insumo_id
+      )
+    }
+    className="
+      px-3
+      py-1
+      rounded-lg
+      bg-red-600
+      text-white
+      text-sm
+    "
+  >
+    Eliminar
+  </button>
+
+</td>
 
             </tr>
 

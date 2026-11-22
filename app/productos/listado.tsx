@@ -5,7 +5,8 @@ import axios from "axios";
 
 export default function ProductosListado() {
 
-  const [productos, setProductos] = useState<any[]>([]);
+  const [productos, setProductos] =
+    useState<any[]>([]);
 
   useEffect(() => {
 
@@ -111,129 +112,179 @@ export default function ProductosListado() {
         Productos Registrados
       </h2>
 
-      <table className="w-full">
+      <div className="overflow-x-auto">
 
-        <thead>
+        <table className="w-full">
 
-          <tr>
+          <thead>
 
-            <th className="p-3 text-left">
-              Producto
-            </th>
+            <tr>
 
-            <th className="p-3 text-left">
-              Tipo
-            </th>
+              <th className="p-3 text-left">
+                Producto
+              </th>
 
-            <th className="p-3 text-left">
-              Precio Venta
-            </th>
+              <th className="p-3 text-left">
+                Tipo
+              </th>
 
-            <th className="p-3 text-left">
-              Acciones
-            </th>
+              <th className="p-3 text-left">
+                Costo
+              </th>
 
-          </tr>
+              <th className="p-3 text-left">
+                Precio Venta
+              </th>
 
-        </thead>
+              <th className="p-3 text-left">
+                Stock Actual
+              </th>
 
-        <tbody>
+              <th className="p-3 text-left">
+                Stock Mínimo
+              </th>
 
-          {productos.map((producto) => (
-
-            <tr
-              key={producto.id_producto}
-              className="hover:bg-slate-50"
-            >
-
-              <td className="p-3 font-medium">
-                {producto.nombre}
-              </td>
-
-              <td className="p-3">
-
-                {producto.tipo_producto === "ELABORADO" ? (
-
-                  <span
-                    className="
-                    px-3
-                    py-1
-                    rounded-full
-                    text-xs
-                    font-medium
-                    bg-[#E8FAF7]
-                    text-[#12B7A6]
-                    "
-                  >
-                    Elaborado
-                  </span>
-
-                ) : (
-
-                  <span
-                    className="
-                    px-3
-                    py-1
-                    rounded-full
-                    text-xs
-                    font-medium
-                    bg-[#EEF5FF]
-                    text-[#4F83CC]
-                    "
-                  >
-                    Reventa
-                  </span>
-
-                )}
-
-              </td>
-
-              <td className="p-3 font-semibold">
-
-                $
-                {Number(
-  producto.precio_venta || 0
-).toLocaleString("es-CL")}
-
-              </td>
-
-              <td className="p-3">
-
-                <div className="flex gap-2">
-
-                  <button
-                    onClick={() =>
-                      editarProducto(
-                        producto
-                      )
-                    }
-                    className="btn-edit"
-                  >
-                    Editar
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      eliminarProducto(
-                        producto.id_producto
-                      )
-                    }
-                    className="btn-delete"
-                  >
-                    Eliminar
-                  </button>
-
-                </div>
-
-              </td>
+              <th className="p-3 text-left">
+                Acciones
+              </th>
 
             </tr>
 
-          ))}
+          </thead>
 
-        </tbody>
+          <tbody>
 
-      </table>
+            {productos.map((producto) => (
+
+              <tr
+                key={producto.id_producto}
+                className="hover:bg-slate-50"
+              >
+
+                <td className="p-3 font-medium">
+                  {producto.nombre}
+                </td>
+
+                <td className="p-3">
+
+                  {producto.tipo_producto ===
+                  "ELABORADO" ? (
+
+                    <span
+                      className="
+                      px-3
+                      py-1
+                      rounded-full
+                      text-xs
+                      font-medium
+                      bg-[#E8FAF7]
+                      text-[#12B7A6]
+                      "
+                    >
+                      Elaborado
+                    </span>
+
+                  ) : (
+
+                    <span
+                      className="
+                      px-3
+                      py-1
+                      rounded-full
+                      text-xs
+                      font-medium
+                      bg-[#EEF5FF]
+                      text-[#4F83CC]
+                      "
+                    >
+                      Reventa
+                    </span>
+
+                  )}
+
+                </td>
+
+                <td className="p-3">
+
+                  $
+                  {Number(
+                    producto.costo_unitario || 0
+                  ).toLocaleString("es-CL")}
+
+                </td>
+
+                <td className="p-3 font-semibold">
+
+                  $
+                  {Number(
+                    producto.precio_venta || 0
+                  ).toLocaleString("es-CL")}
+
+                </td>
+
+                <td className="p-3">
+
+                  <span
+                    className="
+                    px-3
+                    py-1
+                    rounded-full
+                    bg-[#E8FAF7]
+                    text-[#12B7A6]
+                    text-sm
+                    font-medium
+                    "
+                  >
+                    {producto.stock_actual || 0}
+                  </span>
+
+                </td>
+
+                <td className="p-3">
+
+                  {producto.stock_minimo || 0}
+
+                </td>
+
+                <td className="p-3">
+
+                  <div className="flex gap-2">
+
+                    <button
+                      onClick={() =>
+                        editarProducto(
+                          producto
+                        )
+                      }
+                      className="btn-edit"
+                    >
+                      Editar
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        eliminarProducto(
+                          producto.id_producto
+                        )
+                      }
+                      className="btn-delete"
+                    >
+                      Eliminar
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            ))}
+
+          </tbody>
+
+        </table>
+
+      </div>
 
     </div>
 
