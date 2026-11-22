@@ -120,11 +120,9 @@ export default function ComprasListado() {
 
               </td>
 
-              <td className="p-3">
-
-                {compra.insumo || "-"}
-
-              </td>
+              <td>
+  {compra.insumo || compra.producto}
+</td>
 
               <td className="p-3">
 
