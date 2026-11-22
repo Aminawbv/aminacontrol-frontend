@@ -41,11 +41,21 @@ const [tipoCompra, setTipoCompra] =
             "https://aminacontrol-api-729925860477.us-central1.run.app/insumos-select"
           );
 
-          const productosResponse =
-  await axios.get(
-    "https://aminacontrol-api-729925860477.us-central1.run.app/productos-select"
-  );
+          const usuario = JSON.parse(
+  localStorage.getItem("usuario") || "{}"
+);
 
+const productosResponse =
+  await axios.get(
+    "https://aminacontrol-api-729925860477.us-central1.run.app/productos-select",
+    {
+      params: {
+        empresa_id:
+          usuario.empresa_id
+      }
+    }
+  );
+  
 setProductos(
   productosResponse.data
 );
