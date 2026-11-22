@@ -19,6 +19,12 @@ export default function ComprasForm() {
   const [insumos, setInsumos] =
     useState<any[]>([]);
 
+    const [productos, setProductos] =
+  useState<any[]>([]);
+
+const [tipoCompra, setTipoCompra] =
+  useState("INSUMO");
+
   useEffect(() => {
 
     const cargarDatos = async () => {
@@ -34,6 +40,15 @@ export default function ComprasForm() {
           await axios.get(
             "https://aminacontrol-api-729925860477.us-central1.run.app/insumos-select"
           );
+
+          const productosResponse =
+  await axios.get(
+    "https://aminacontrol-api-729925860477.us-central1.run.app/productos-select"
+  );
+
+setProductos(
+  productosResponse.data
+);
 
         setProveedores(
           proveedoresResponse.data
@@ -68,6 +83,9 @@ export default function ComprasForm() {
         {
           empresa_id: usuario.empresa_id,
 
+          tipo_compra: tipoCompra,
+
+
           proveedor_id: data.proveedor_id,
 
           fecha_compra: data.fecha_compra,
@@ -95,15 +113,19 @@ export default function ComprasForm() {
 
       reset();
 
-    } catch (error) {
+    } catch (error: any) {
 
-      console.error(error);
+  console.error(error);
 
-      alert(
-        "Error al registrar compra"
-      );
+  alert(
+    JSON.stringify(
+      error?.response?.data,
+      null,
+      2
+    )
+  );
 
-    }
+}
 
   };
 
@@ -208,33 +230,84 @@ export default function ComprasForm() {
 
         <div className="mb-6 form-field">
 
-          <label className="block mb-2">
-            Insumo
-          </label>
+  <label className="block mb-2">
+    Tipo Compra
+  </label>
 
-          <select
-            {...register("insumo_id")}
-            className="input"
+  <select
+    value={tipoCompra}
+    onChange={(e) =>
+      setTipoCompra(
+        e.target.value
+      )
+    }
+    className="input"
+  >
+
+    <option value="INSUMO">
+      Insumo
+    </option>
+
+    <option value="PRODUCTO">
+      Producto
+    </option>
+
+  </select>
+
+</div>
+
+        <div className="mb-6 form-field">
+
+  <label className="block mb-2">
+
+    {tipoCompra === "INSUMO"
+      ? "Insumo"
+      : "Producto"}
+
+  </label>
+
+  <select
+    {...register(
+      tipoCompra === "INSUMO"
+        ? "insumo_id"
+        : "producto_id"
+    )}
+    className="input"
+  >
+
+    <option value="">
+      Seleccione
+    </option>
+
+    {tipoCompra === "INSUMO"
+
+      ? insumos.map((insumo) => (
+
+          <option
+            key={insumo.insumo_id}
+            value={insumo.insumo_id}
           >
+            {insumo.nombre}
+          </option>
 
-            <option value="">
-              Seleccione
-            </option>
+        ))
 
-            {insumos.map((insumo) => (
+      : productos.map((producto) => (
 
-              <option
-                key={insumo.insumo_id}
-                value={insumo.insumo_id}
-              >
-                {insumo.nombre}
-              </option>
+          <option
+            key={producto.id_producto}
+            value={producto.id_producto}
+          >
+            {producto.nombre}
+          </option>
 
-            ))}
+        ))
 
-          </select>
+    }
 
-        </div>
+  </select>
+
+</div>
 
         <div className="mb-6 form-field">
 

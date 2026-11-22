@@ -13,9 +13,7 @@ export default function ProductosForm() {
   const [costoUnitario, setCostoUnitario] =
     useState("");
 
-  const [stockInicial, setStockInicial] =
-    useState("");
-
+  
   const [stockMinimo, setStockMinimo] =
     useState("");
 
@@ -45,10 +43,7 @@ export default function ProductosForm() {
               ? Number(costoUnitario)
               : 0,
 
-          stock_inicial:
-            Number(stockInicial),
-
-          stock_minimo:
+                  stock_minimo:
             Number(stockMinimo),
 
           tipo_producto:
@@ -172,25 +167,7 @@ export default function ProductosForm() {
 
       )}
 
-      <div className="mb-6 form-field">
-
-        <label className="block mb-2">
-          Stock Inicial
-        </label>
-
-        <input
-          type="number"
-          value={stockInicial}
-          onChange={(e) =>
-            setStockInicial(
-              e.target.value
-            )
-          }
-          className="input"
-          placeholder="0"
-        />
-
-      </div>
+     
 
       <div className="mb-6 form-field">
 

@@ -222,23 +222,49 @@ export default function ProductosListado() {
 
                 </td>
 
-                <td className="p-3">
+              <td className="p-3">
 
-                  <span
-                    className="
-                    px-3
-                    py-1
-                    rounded-full
-                    bg-[#E8FAF7]
-                    text-[#12B7A6]
-                    text-sm
-                    font-medium
-                    "
-                  >
-                    {producto.stock_actual || 0}
-                  </span>
+  {Number(
+    producto.stock_actual || 0
+  ) <= Number(
+    producto.stock_minimo || 0
+  ) ? (
 
-                </td>
+    <span
+      className="
+      px-3
+      py-1
+      rounded-full
+      bg-red-100
+      text-red-700
+      text-sm
+      font-medium
+      "
+    >
+      {producto.stock_actual || 0}
+      {" "}
+      (Stock Bajo)
+    </span>
+
+  ) : (
+
+    <span
+      className="
+      px-3
+      py-1
+      rounded-full
+      bg-green-100
+      text-green-700
+      text-sm
+      font-medium
+      "
+    >
+      {producto.stock_actual || 0}
+    </span>
+
+  )}
+
+</td>
 
                 <td className="p-3">
 
