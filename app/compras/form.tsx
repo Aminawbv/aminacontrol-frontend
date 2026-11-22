@@ -78,34 +78,45 @@ setProductos(
         localStorage.getItem("usuario") || "{}"
       );
 
-      await axios.post(
-        "https://aminacontrol-api-729925860477.us-central1.run.app/compras",
-        {
-          empresa_id: usuario.empresa_id,
+      console.log({
+  empresa_id: usuario.empresa_id,
+  tipo_compra: tipoCompra,
+  proveedor_id: data.proveedor_id,
+  insumo_id: data.insumo_id,
+  producto_id: data.producto_id,
+  cantidad: Number(data.cantidad),
+  costo_unitario: Number(data.costo_unitario)
+});
 
-          tipo_compra: tipoCompra,
+     await axios.post(
+  "https://aminacontrol-api-729925860477.us-central1.run.app/compras",
+  {
+    empresa_id: usuario.empresa_id,
 
+    tipo_compra: tipoCompra,
 
-          proveedor_id: data.proveedor_id,
+    proveedor_id: data.proveedor_id,
 
-          fecha_compra: data.fecha_compra,
+    fecha_compra: data.fecha_compra,
 
-          metodo_pago: data.metodo_pago,
+    metodo_pago: data.metodo_pago,
 
-          insumo_id: data.insumo_id,
+    insumo_id: data.insumo_id,
 
-          cantidad: Number(
-            data.cantidad
-          ),
+    producto_id: data.producto_id,
 
-          unidad_compra:
-            data.unidad_compra,
+    cantidad: Number(
+      data.cantidad
+    ),
 
-          costo_unitario: Number(
-            data.costo_unitario
-          )
-        }
-      );
+    unidad_compra:
+      data.unidad_compra,
+
+    costo_unitario: Number(
+      data.costo_unitario
+    )
+  }
+);
 
       alert(
         "Compra registrada correctamente"
